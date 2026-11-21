@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS AS - AI Control Center</title>
+<style>
+:root {
+    --bg: #07111f;
+    --panel: #101f32;
+    --panel2: #142941;
+    --blue: #26a9ff;
+    --text: #edf6ff;
+    --muted: #91a9c0;
+    --border: rgba(80,170,255,.2);
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #102d4b, var(--bg) 55%);
+    color: var(--text);
+}
+header {
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: rgba(5,15,28,.8);
+}
+.logo {
+    color: var(--blue);
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+nav { display:flex; gap:16px; flex-wrap:wrap; }
+a { color: var(--muted); text-decoration:none; }
+a:hover { color: var(--blue); }
+main { max-width: 1150px; margin: auto; padding: 35px 20px; }
+h1 { font-size: 36px; margin-bottom: 8px; }
+.subtitle { color: var(--muted); line-height: 1.6; }
+.section-title { margin: 35px 0 15px; font-size: 22px; }
+.grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap:16px;
+}
+.card {
+    background: linear-gradient(145deg,var(--panel),#0b1929);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.15);
+}
+.card h3 { margin-top:0; }
+.card p { color:var(--muted); line-height:1.5; }
+button, .button {
+    border:1px solid var(--blue);
+    background:rgba(38,169,255,.12);
+    color:var(--text);
+    padding:11px 16px;
+    border-radius:9px;
+    cursor:pointer;
+    display:inline-block;
+    margin-top:8px;
+    font-size:14px;
+}
+button:hover, .button:hover {
+    background:var(--blue);
+    color:#001321;
+}
+button:disabled { opacity:.5; cursor:not-allowed; }
+.status {
+    display:inline-block;
+    color:#ffd27a;
+    background:rgba(255,190,70,.1);
+    border:1px solid rgba(255,190,70,.3);
+    border-radius:20px;
+    padding:5px 10px;
+    font-size:12px;
+}
+.persona {
+    min-height:180px;
+    position:relative;
+    overflow:hidden;
+}
+.persona.jarvis { border-color:rgba(38,169,255,.5); }
+.persona.ultron { border-color:rgba(255,65,65,.5); }
+.persona.ultron h3 { color:#ff5555; }
+.persona.jarvis h3 { color:#42baff; }
+.reactor {
+    width:90px;
+    height:90px;
+    border:3px solid var(--blue);
+    border-radius:50%;
+    margin:12px auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--blue);
+    font-size:25px;
+    font-weight:bold;
+    box-shadow:0 0 25px rgba(38,169,255,.35);
+    animation:pulse 3s infinite;
+}
+@keyframes pulse {
+    0%,100% { box-shadow:0 0 12px rgba(38,169,255,.2); }
+    50% { box-shadow:0 0 32px rgba(38,169,255,.7); }
+}
+.ultron-reactor {
+    border-color:#ff4444;
+    color:#ff4444;
+    box-shadow:0 0 25px rgba(255,50,50,.3);
+}
+.notice {
+    border-left:3px solid #ffbd54;
+    padding:12px 15px;
+    background:rgba(255,189,84,.08);
+    color:#e8d4b3;
+    border-radius:5px;
+    line-height:1.5;
+}
+.feature-list { color:var(--muted); line-height:1.9; padding-left:20px; }
+footer {
+    text-align:center;
+    padding:30px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    margin-top:40px;
+}
+@media(max-width:600px) {
+    header { align-items:flex-start; flex-direction:column; gap:15px; }
+    h1 { font-size:29px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">JARVIS AS</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="chats.html">Chats</a>
+        <a href="settings.html">Settings</a>
+        <a href="owner.html">Owner</a>
+    </nav>
+</header>
+
+<main>
+    <h1>AI Control Center</h1>
+    <p class="subtitle">
+        Beheer je AI-personaliteiten, ontdek de functies en stel jouw
+        JARVIS-ervaring samen.
+    </p>
+
+    <div class="notice">
+        <strong>Prototype:</strong> Dit is momenteel de voorkant van het
+        AI Control Center. Er is nog geen AI-model of beveiligde backend
+        aangesloten. De echte AI-functies komen in een volgende ontwikkelfase.
+    </div>
+
+    <h2 class="section-title">Jouw AI-personaliteiten</h2>
+    <div class="grid">
+        <div class="card persona jarvis">
+            <h3>JARVIS</h3>
+            <div class="reactor">J</div>
+            <p>De vertrouwde AI-assistent. Slim, behulpzaam, rustig en persoonlijk.</p>
+            <span class="status">Standaard persoonlijkheid</span><br>
+            <button onclick="selectAI('JARVIS')">Select JARVIS</button>
+        </div>
+
+        <div class="card persona ultron">
+            <h3>ULTRON</h3>
+            <div class="reactor ultron-reactor">U</div>
+            <p>Analytisch, strategisch, zelfverzekerd en met droge humor.</p>
+            <span class="status">Beschikbaar als prototype</span><br>
+            <button onclick="selectAI('ULTRON')">Select ULTRON</button>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+        <h3>Geselecteerde AI</h3>
+        <p id="selectedAI">JARVIS is momenteel geselecteerd.</p>
+        <p class="subtitle">Je keuze wordt lokaal op dit apparaat opgeslagen.</p>
+    </div>
+
+    <h2 class="section-title">Custom AI-personaliteiten</h2>
+    <div class="card">
+        <h3>Maak je eigen AI-werkruimtes</h3>
+        <p>
+            Naast JARVIS en ULTRON kun je later maximaal vijf eigen
+            AI-personaliteiten instellen. Elke werkruimte krijgt eigen
+            voorkeuren, persoonlijkheid en chatgeschiedenis.
+        </p>
+        <ul class="feature-list">
+            <li>Eigen naam en afbeelding</li>
+            <li>Eigen persoonlijkheid en schrijfstijl</li>
+            <li>Eigen taalvoorkeuren</li>
+            <li>Eigen instellingen en chatgeschiedenis</li>
+            <li>Wisselen tussen verschillende AI-personaliteiten</li>
+        </ul>
+        <span class="status">Gepland</span>
+    </div>
+
+    <h2 class="section-title">AI-instellingen</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>🌍 Talen</h3>
+            <p>Gebruik één taal, meerdere talen of automatische taaldetectie.</p>
+            <a class="button" href="language.html">Taalinstellingen</a>
+        </div>
+
+        <div class="card">
+            <h3>🧠 Memory</h3>
+            <p>Beheer welke informatie jouw AI later mag gebruiken.</p>
+            <span class="status">In ontwikkeling</span>
+        </div>
+
+        <div class="card">
+            <h3>🎭 Persoonlijkheid</h3>
+            <p>Pas de naam, toon en manier van communiceren aan.</p>
+            <a class="button" href="settings.html">Open instellingen</a>
+        </div>
+
+        <div class="card">
+            <h3>🔒 Privacy</h3>
+            <p>Bekijk de privacyregels en beveiligingsinstellingen.</p>
+            <a class="button" href="privacy.html">Privacy bekijken</a>
+        </div>
+    </div>
+
+    <h2 class="section-title">AI-functies</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>💬 AI Chat</h3>
+            <p>Praat met jouw AI, stel vragen en werk samen aan projecten.</p>
+            <a class="button" href="dashboard.html">Open dashboard</a>
+        </div>
+
+        <div class="card">
+            <h3>🎨 AI Create</h3>
+            <p>Maak later afbeeldingen en andere creatieve projecten.</p>
+            <span class="status">Gepland</span>
+        </div>
+
+        <div class="card">
+            <h3>🎮 Game Studio</h3>
+            <p>Ontwikkel game-assets, personages, werelden en spelideeën.</p>
+            <span class="status">Gepland</span>
+        </div>
+
+        <div class="card">
+            <h3>🌐 AI Browser</h3>
+            <p>Gebruik de browseromgeving en open websites.</p>
+            <a class="button" href="browser.html">Open browser</a>
+        </div>
+    </div>
+
+    <h2 class="section-title">Technische status</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>AI-model</h3>
+            <p>Nog niet verbonden</p>
+            <span class="status">Backend nodig</span>
+        </div>
+        <div class="card">
+            <h3>Accountverbinding</h3>
+            <p>Prototype zonder echte accountverificatie</p>
+            <span class="status">In ontwikkeling</span>
+        </div>
+        <div class="card">
+            <h3>Cloud Memory</h3>
+            <p>Nog niet aangesloten op een database</p>
+            <span class="status">Gepland</span>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+        <h3>Volgende technische stap</h3>
+        <p>
+            Om JARVIS echt te laten antwoorden, moeten we een beveiligde
+            backend bouwen die verbinding maakt met een AI-model.
+            Geheime API-sleutels komen uitsluitend op die server en nooit
+            in openbare HTML- of JavaScript-bestanden.
+        </p>
+        <a class="button" href="security.html">Bekijk Security Center</a>
+    </div>
+</main>
+
+<footer>
+    JARVIS AS · AI Control Center · Prototype
+</footer>
+
+<script>
+function selectAI(name) {
+    localStorage.setItem("jarvis_selected_ai", name);
+
+    const message = name === "ULTRON"
+        ? "ULTRON is geselecteerd. Zijn rode interface en persoonlijkheid worden verder ontwikkeld."
+        : "JARVIS is geselecteerd. Je vertrouwde assistent staat klaar.";
+
+    document.getElementById("selectedAI").textContent = message;
+}
+
+const savedAI = localStorage.getItem("jarvis_selected_ai") || "JARVIS";
+
+document.getElementById("selectedAI").textContent =
+    savedAI + " is momenteel geselecteerd.";
+</script>
+
+</body>
+</html>
