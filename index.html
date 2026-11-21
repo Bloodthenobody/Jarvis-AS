@@ -9,200 +9,186 @@
 <title>JARVIS AS | Artificial Support</title>
 
 <style>
-:root {
-  --bg:#080f1c;
-  --panel:#101d30;
-  --panel2:#152842;
-  --text:#f3f7ff;
-  --muted:#a8bad0;
-  --blue:#55baff;
-  --border:#263c56;
-  --shadow:0 0 30px #248bd522;
+:root{
+ --bg:#080f1c;
+ --panel:#101d30;
+ --panel2:#152842;
+ --text:#f3f7ff;
+ --muted:#a8bad0;
+ --blue:#55baff;
+ --border:#263c56;
+ --shadow:0 0 30px #248bd522;
 }
-body.light {
-  --bg:#eef4fb;
-  --panel:#ffffff;
-  --panel2:#e2edf8;
-  --text:#142238;
-  --muted:#53677f;
-  --blue:#087cc5;
-  --border:#cbd8e7;
-  --shadow:0 0 25px #087cc522;
+body.light{
+ --bg:#eef4fb;
+ --panel:#fff;
+ --panel2:#e2edf8;
+ --text:#142238;
+ --muted:#53677f;
+ --blue:#087cc5;
+ --border:#cbd8e7;
+ --shadow:0 0 25px #087cc522;
 }
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:background .25s,color .25s;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;
+ font-family:Arial,Helvetica,sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ transition:.25s;
 }
-a { text-decoration:none;color:inherit; }
-button,select,input {
-  font:inherit;
+a{text-decoration:none;color:inherit}
+button,select{font:inherit}
+button,.button{
+ cursor:pointer;
+ border:1px solid var(--border);
+ border-radius:10px;
+ padding:11px 16px;
+ color:var(--text);
+ background:var(--panel);
+ display:inline-block;
 }
-button {
-  cursor:pointer;
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:11px 16px;
-  color:var(--text);
-  background:var(--panel);
+button:hover,.button:hover{
+ border-color:var(--blue);
+ box-shadow:var(--shadow);
 }
-button:hover {
-  border-color:var(--blue);
-  box-shadow:var(--shadow);
+header{
+ position:sticky;
+ top:0;
+ z-index:20;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+ padding:15px 5%;
+ background:var(--bg);
+ border-bottom:1px solid var(--border);
 }
-header {
-  position:sticky;
-  top:0;
-  z-index:20;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  padding:15px 5%;
-  background:var(--bg);
-  border-bottom:1px solid var(--border);
+.logo{font-size:21px;font-weight:900;letter-spacing:2px}
+.logo span{color:var(--blue)}
+nav{
+ display:flex;
+ align-items:center;
+ gap:16px;
+ flex-wrap:wrap;
 }
-.logo {
-  font-size:21px;
-  font-weight:900;
-  letter-spacing:2px;
+nav a{color:var(--muted);font-size:14px}
+nav a:hover{color:var(--blue)}
+.header-controls{display:flex;gap:8px;align-items:center}
+select{
+ background:var(--panel);
+ color:var(--text);
+ border:1px solid var(--border);
+ border-radius:9px;
+ padding:10px;
+ max-width:100%;
 }
-.logo span { color:var(--blue); }
-nav {
-  display:flex;
-  align-items:center;
-  gap:20px;
-  flex-wrap:wrap;
+.hero{
+ min-height:570px;
+ padding:80px 20px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ background:radial-gradient(ellipse at center,#153b65 0%,var(--bg) 68%);
 }
-nav a {
-  color:var(--muted);
-  font-size:14px;
+.reactor{
+ width:170px;
+ height:170px;
+ border:3px solid var(--blue);
+ border-radius:50%;
+ display:grid;
+ place-items:center;
+ font-size:88px;
+ font-weight:bold;
+ box-shadow:0 0 25px var(--blue),inset 0 0 25px #2588cc;
+ animation:pulse 3s infinite ease-in-out;
 }
-nav a:hover { color:var(--blue); }
-.header-controls {
-  display:flex;
-  gap:8px;
-  align-items:center;
+@keyframes pulse{
+ 50%{box-shadow:0 0 48px var(--blue),inset 0 0 38px #2588cc}
 }
-select,input {
-  background:var(--panel);
-  color:var(--text);
-  border:1px solid var(--border);
-  border-radius:9px;
-  padding:10px;
-  max-width:100%;
+h1{font-size:clamp(38px,7vw,68px);letter-spacing:2px;margin:30px 0 12px}
+h2{font-size:32px}
+p{color:var(--muted);line-height:1.7}
+.hero p{max-width:680px}
+.primary{
+ background:var(--blue);
+ color:#061322;
+ border:0;
+ font-weight:bold;
+ padding:14px 22px;
 }
-.hero {
-  min-height:570px;
-  padding:80px 20px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  background:radial-gradient(ellipse at center,#153b65 0%,var(--bg) 68%);
+section{padding:70px 7%;text-align:center}
+.section-intro{max-width:700px;margin:0 auto}
+.cards{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:18px;
+ max-width:1100px;
+ margin:35px auto;
 }
-.reactor {
-  width:170px;
-  height:170px;
-  border:3px solid var(--blue);
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:88px;
-  font-weight:bold;
-  box-shadow:0 0 25px var(--blue),inset 0 0 25px #2588cc;
-  animation:pulse 3s infinite ease-in-out;
+.card{
+ height:100%;
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:16px;
+ padding:25px;
+ text-align:left;
+ transition:transform .2s,border .2s;
 }
-@keyframes pulse {
-  50% {
-    box-shadow:0 0 48px var(--blue),inset 0 0 38px #2588cc;
-  }
+.card:hover{
+ transform:translateY(-4px);
+ border-color:var(--blue);
+ box-shadow:var(--shadow);
 }
-h1 {
-  font-size:clamp(38px,7vw,68px);
-  letter-spacing:2px;
-  margin:30px 0 12px;
+.card-link{display:block;height:100%}
+.symbol{font-size:32px;color:var(--blue)}
+.card p{font-size:14px}
+.price{font-size:27px;font-weight:bold;color:var(--blue)}
+.cta{
+ max-width:850px;
+ margin:auto;
+ padding:40px 25px;
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:20px;
 }
-h2 { font-size:32px; }
-p {
-  color:var(--muted);
-  line-height:1.7;
+.quick-links{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:12px;
+ margin:25px auto;
+ max-width:1000px;
 }
-.hero p { max-width:650px; }
-.primary {
-  background:var(--blue);
-  color:#061322;
-  border:0;
-  font-weight:bold;
-  padding:14px 22px;
+.quick-links a{
+ padding:13px 18px;
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:10px;
+ color:var(--text);
 }
-section {
-  padding:70px 7%;
-  text-align:center;
+.quick-links a:hover{border-color:var(--blue);color:var(--blue)}
+footer{
+ border-top:1px solid var(--border);
+ padding:30px 15px;
+ text-align:center;
+ color:var(--muted);
+ font-size:13px;
 }
-.section-intro {
-  max-width:650px;
-  margin:0 auto;
+footer a{color:var(--blue);margin:0 6px}
+@media(max-width:850px){
+ header{flex-wrap:wrap}
+ nav{order:3;width:100%;gap:13px}
+ .header-controls{margin-left:auto}
+ section{padding:48px 5%}
 }
-.cards {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
-  max-width:1100px;
-  margin:35px auto;
-}
-.card {
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:25px;
-  text-align:left;
-  transition:transform .2s,border .2s;
-}
-.card:hover {
-  transform:translateY(-4px);
-  border-color:var(--blue);
-}
-.symbol {
-  font-size:32px;
-  color:var(--blue);
-}
-.card p { font-size:14px; }
-.price {
-  font-size:27px;
-  font-weight:bold;
-  color:var(--blue);
-}
-.cta {
-  max-width:850px;
-  margin:auto;
-  padding:40px 25px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:20px;
-}
-footer {
-  border-top:1px solid var(--border);
-  padding:30px 15px;
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-}
-footer a { color:var(--blue); }
-@media(max-width:750px) {
-  header { flex-wrap:wrap; }
-  nav {
-    order:3;
-    width:100%;
-    gap:14px;
-  }
-  .header-controls { margin-left:auto; }
-  section { padding:48px 5%; }
+@media(max-width:480px){
+ .header-controls{width:100%;margin:0}
+ nav{justify-content:center}
+ .reactor{width:135px;height:135px;font-size:68px}
 }
 </style>
 </head>
@@ -210,205 +196,296 @@ footer a { color:var(--blue); }
 <body>
 
 <header>
-  <a class="logo" href="#home">◉ JARVIS <span>AS</span></a>
+ <a class="logo" href="index.html">◉ JARVIS <span>AS</span></a>
 
-  <nav>
-    <a href="#home" data-i="home">Home</a>
-    <a href="#features" data-i="features">Features</a>
-    <a href="#studio">Game Studio</a>
-    <a href="#accounts" data-i="accounts">Accounts</a>
-  </nav>
+ <nav>
+  <a href="index.html">Home</a>
+  <a href="#features">Features</a>
+  <a href="#studio">Game Studio</a>
+  <a href="#accounts">Accounts</a>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="browser.html">Browser</a>
+ </nav>
 
-  <div class="header-controls">
-    <select id="language" aria-label="Select language">
-      <option value="nl">NL</option>
-      <option value="en">EN</option>
-      <option value="de">DE</option>
-    </select>
-    <button id="theme" aria-label="Change theme">☀</button>
-  </div>
+ <div class="header-controls">
+  <select id="language" aria-label="Select language">
+   <option value="nl">NL</option>
+   <option value="en">EN</option>
+   <option value="de">DE</option>
+  </select>
+  <button id="theme" aria-label="Change theme">☀</button>
+  <a class="button primary" href="login.html">Login / Register</a>
+ </div>
 </header>
 
 <main>
 
 <section class="hero" id="home">
-  <div class="reactor">J</div>
-  <h1>YOUR AI. YOUR WORLD.</h1>
-  <p data-i="intro">
-    Ontdek JARVIS AS – jouw persoonlijke AI-platform
-    voor chatten, creëren, ontdekken en bouwen.
-  </p>
-  <a href="#features">
-    <button class="primary" data-i="discover">ONTDEK JARVIS AS</button>
-  </a>
-  <p>ARTIFICIAL SUPPORT · JARVIS TECHNOLOGY</p>
+ <div class="reactor">J</div>
+ <h1>YOUR AI. YOUR WORLD.</h1>
+ <p data-i="intro">
+  Ontdek JARVIS AS – jouw persoonlijke AI-platform
+  voor chatten, creëren, ontdekken en bouwen.
+ </p>
+ <a href="#features" class="button primary" data-i="discover">ONTDEK JARVIS AS</a>
+ <p>ARTIFICIAL SUPPORT · JARVIS TECHNOLOGY</p>
+ <div class="quick-links">
+  <a href="login.html">Aanmelden</a>
+  <a href="dashboard.html">Open Dashboard</a>
+  <a href="browser.html">JARVIS Browser</a>
+ </div>
 </section>
 
 <section id="features">
-  <h2 data-i="featureTitle">Wat kan JARVIS AS?</h2>
-  <p class="section-intro" data-i="featureIntro">
-    Eén platform voor jouw ideeën en projecten.
-  </p>
+ <h2 data-i="featureTitle">Wat kan JARVIS AS?</h2>
+ <p class="section-intro">
+  JARVIS AS is ontworpen als één centrale plek voor AI,
+  persoonlijke projecten, creativiteit en productiviteit.
+  Ontdek hieronder de verschillende onderdelen.
+ </p>
 
-  <div class="cards">
-    <article class="card">
-      <div class="symbol">◉</div>
-      <h3>AI Assistant</h3>
-      <p data-i="ai">Chat, stel vragen en werk samen met jouw AI.</p>
-    </article>
+ <div class="cards">
+  <a class="card-link" href="dashboard.html">
+   <article class="card">
+    <div class="symbol">◉</div>
+    <h3>AI Assistant</h3>
+    <p>Chat met JARVIS, stel vragen, bespreek ideeën en gebruik één centraal AI-dashboard.</p>
+    <strong>Open Dashboard →</strong>
+   </article>
+  </a>
 
-    <article class="card">
-      <div class="symbol">✧</div>
-      <h3>AI Create</h3>
-      <p data-i="create">Maak afbeeldingen, ontwerpen en creatieve projecten.</p>
-    </article>
+  <a class="card-link" href="chats.html">
+   <article class="card">
+    <div class="symbol">▤</div>
+    <h3>Chats</h3>
+    <p>Bekijk je gesprekken, start nieuwe chats en organiseer je chatgeschiedenis.</p>
+    <strong>Open Chats →</strong>
+   </article>
+  </a>
 
-    <article class="card" id="studio">
-      <div class="symbol">⬡</div>
-      <h3>JARVIS GAME STUDIO</h3>
-      <p data-i="game">Ontwikkel gameconcepten, personages en 3D-assets.</p>
-    </article>
+  <a class="card-link" href="browser.html">
+   <article class="card">
+    <div class="symbol">◎</div>
+    <h3>JARVIS Browser</h3>
+    <p>Open websites vanuit JARVIS. De verdere zoek- en browserfuncties worden nog ontwikkeld.</p>
+    <strong>Open Browser →</strong>
+   </article>
+  </a>
 
-    <article class="card">
-      <div class="symbol">⌘</div>
-      <h3>Projects</h3>
-      <p data-i="projects">Organiseer je ideeën en werk aan projecten.</p>
-    </article>
-  </div>
+  <a class="card-link" href="language.html">
+   <article class="card">
+    <div class="symbol">文</div>
+    <h3>Languages</h3>
+    <p>Kies je voorkeurstaal en ontdek de taalinstellingen van JARVIS AS.</p>
+    <strong>Select Language →</strong>
+   </article>
+  </a>
+
+  <a class="card-link" href="settings.html">
+   <article class="card">
+    <div class="symbol">⚙</div>
+    <h3>Personalization</h3>
+    <p>Pas je AI-naam, persoonlijkheid, thema, meldingen en andere voorkeuren aan.</p>
+    <strong>Open Settings →</strong>
+   </article>
+  </a>
+
+  <a class="card-link" href="plans.html">
+   <article class="card">
+    <div class="symbol">✧</div>
+    <h3>AI Create</h3>
+    <p>Ontdek de geplande creatieve mogelijkheden en functies van JARVIS-abonnementen.</p>
+    <strong>Bekijk Plans →</strong>
+   </article>
+  </a>
+
+  <a class="card-link" href="dashboard.html">
+   <article class="card" id="studio">
+    <div class="symbol">⬡</div>
+    <h3>JARVIS GAME STUDIO</h3>
+    <p>Werk aan gameconcepten, personages, monsters, gebouwen en 3D-game-assets.</p>
+    <strong>Open Dashboard →</strong>
+   </article>
+  </a>
+
+  <a class="card-link" href="chats.html">
+   <article class="card">
+    <div class="symbol">⌘</div>
+    <h3>Projects</h3>
+    <p>Werk aan ideeën en projecten. De aparte projectenpagina wordt later toegevoegd.</p>
+    <strong>Open Chats →</strong>
+   </article>
+  </a>
+ </div>
+</section>
+
+<section id="how">
+ <h2>Hoe werkt JARVIS AS?</h2>
+ <p class="section-intro">
+  Het platform is bedoeld om verschillende AI-functies samen te brengen.
+  Je begint met een account, kiest je voorkeuren en gebruikt daarna
+  de beschikbare onderdelen vanuit het dashboard.
+ </p>
+ <div class="cards">
+  <article class="card">
+   <div class="symbol">1</div>
+   <h3>Maak een account</h3>
+   <p>Bekijk de registratiepagina en ontdek de beschikbare accounttypes.</p>
+   <a href="login.html">Naar registratie →</a>
+  </article>
+  <article class="card">
+   <div class="symbol">2</div>
+   <h3>Stel JARVIS in</h3>
+   <p>Bekijk de taalkeuze en personalisatie-instellingen.</p>
+   <a href="language.html">Taal kiezen →</a>
+  </article>
+  <article class="card">
+   <div class="symbol">3</div>
+   <h3>Ontdek het platform</h3>
+   <p>Open het dashboard en ontdek de verschillende onderdelen.</p>
+   <a href="dashboard.html">Naar Dashboard →</a>
+  </article>
+ </div>
 </section>
 
 <section id="accounts">
-  <h2 data-i="accountTitle">Kies jouw JARVIS-account</h2>
+ <h2 data-i="accountTitle">Kies jouw JARVIS-account</h2>
+ <p class="section-intro">
+  Bekijk welk accounttype bij jouw gebruik past.
+  De abonnementen en accountfuncties worden verder ontwikkeld.
+ </p>
 
-  <div class="cards">
-    <article class="card">
-      <div class="symbol">◇</div>
-      <h3>JARVIS Free</h3>
-      <div class="price">€0</div>
-      <p data-i="free">Begin gratis met JARVIS AS.</p>
-    </article>
+ <div class="cards">
+  <a class="card-link" href="plans.html">
+   <article class="card">
+    <div class="symbol">◇</div>
+    <h3>JARVIS Free</h3>
+    <div class="price">€0</div>
+    <p>Begin gratis met JARVIS AS en ontdek de basisfuncties.</p>
+    <strong>Meer informatie →</strong>
+   </article>
+  </a>
 
-    <article class="card">
-      <div class="symbol">✧</div>
-      <h3>JARVIS Pro</h3>
-      <div class="price">€5 / P.M.</div>
-      <p data-i="pro">Meer mogelijkheden en uitgebreidere creatietools.</p>
-    </article>
+  <a class="card-link" href="plans.html">
+   <article class="card">
+    <div class="symbol">✧</div>
+    <h3>JARVIS Pro</h3>
+    <div class="price">€5 / P.M.</div>
+    <p>Meer mogelijkheden en uitgebreidere creatietools.</p>
+    <strong>Meer informatie →</strong>
+   </article>
+  </a>
 
-    <article class="card">
-      <div class="symbol">♛</div>
-      <h3>JARVIS OAI Owner</h3>
-      <div class="price">Owner</div>
-      <p data-i="owner">Speciaal eigenaar-account.</p>
-    </article>
-  </div>
+  <a class="card-link" href="plans.html">
+   <article class="card">
+    <div class="symbol">♛</div>
+    <h3>JARVIS OAI Owner</h3>
+    <div class="price">Owner</div>
+    <p>Het speciale eigenaar-account van het JARVIS-platform.</p>
+    <strong>Meer informatie →</strong>
+   </article>
+  </a>
+ </div>
 
-  <p data-i="coming">
-    Accountregistratie komt in een volgende versie.
-  </p>
+ <a href="plans.html" class="button primary">BEKIJK ALLE ABONNEMENTEN</a>
+</section>
+
+<section id="pages">
+ <h2>Explore JARVIS AS</h2>
+ <p class="section-intro">Gebruik deze snelkoppelingen om rechtstreeks naar een onderdeel te gaan.</p>
+
+ <div class="quick-links">
+  <a href="index.html">Home</a>
+  <a href="login.html">Login / Register</a>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="browser.html">Browser</a>
+  <a href="chats.html">Chats</a>
+  <a href="language.html">Select Language</a>
+  <a href="settings.html">Settings</a>
+  <a href="plans.html">Plans</a>
+ </div>
 </section>
 
 <section>
-  <div class="cta">
-    <h2 data-i="ready">Klaar voor de toekomst?</h2>
-    <p>JARVIS AS – Artificial Support.</p>
-    <a href="#home">
-      <button class="primary" data-i="top">TERUG NAAR BOVEN</button>
-    </a>
-  </div>
+ <div class="cta">
+  <h2>Klaar om JARVIS AS te ontdekken?</h2>
+  <p>JARVIS AS – Artificial Support. Your AI. Your World.</p>
+  <a href="login.html" class="button primary">START MET JARVIS</a>
+ </div>
 </section>
 
 </main>
 
 <footer>
-  © 2026 JARVIS AS · Artificial Support
-  <br><br>
-  <a href="#home">Home</a> ·
-  <a href="#features">Features</a> ·
-  <a href="#accounts">Accounts</a>
+ © 2026 JARVIS AS · Artificial Support
+ <br><br>
+ <a href="index.html">Home</a>
+ <a href="login.html">Login</a>
+ <a href="dashboard.html">Dashboard</a>
+ <a href="browser.html">Browser</a>
+ <a href="settings.html">Settings</a>
+ <a href="plans.html">Plans</a>
+ <a href="language.html">Languages</a>
+ <a href="chats.html">Chats</a>
 </footer>
 
 <script>
-const translations = {
- nl: {
-  home:"Home",features:"Functies",accounts:"Accounts",
+const translations={
+ nl:{
   intro:"Ontdek JARVIS AS – jouw persoonlijke AI-platform voor chatten, creëren, ontdekken en bouwen.",
   discover:"ONTDEK JARVIS AS",
   featureTitle:"Wat kan JARVIS AS?",
-  featureIntro:"Eén platform voor jouw ideeën en projecten.",
-  ai:"Chat, stel vragen en werk samen met jouw AI.",
-  create:"Maak afbeeldingen, ontwerpen en creatieve projecten.",
-  game:"Ontwikkel gameconcepten, personages en 3D-assets.",
-  projects:"Organiseer je ideeën en werk aan projecten.",
-  accountTitle:"Kies jouw JARVIS-account",
-  free:"Begin gratis met JARVIS AS.",
-  pro:"Meer mogelijkheden en uitgebreidere creatietools.",
-  owner:"Speciaal eigenaar-account.",
-  coming:"Accountregistratie komt in een volgende versie.",
-  ready:"Klaar voor de toekomst?",
-  top:"TERUG NAAR BOVEN"
+  accountTitle:"Kies jouw JARVIS-account"
  },
- en: {
-  home:"Home",features:"Features",accounts:"Accounts",
+ en:{
   intro:"Discover JARVIS AS – your personal AI platform for chatting, creating, exploring and building.",
   discover:"EXPLORE JARVIS AS",
   featureTitle:"What can JARVIS AS do?",
-  featureIntro:"One platform for your ideas and projects.",
-  ai:"Chat, ask questions and work with your AI.",
-  create:"Create images, designs and creative projects.",
-  game:"Develop game concepts, characters and 3D assets.",
-  projects:"Organize your ideas and work on projects.",
-  accountTitle:"Choose your JARVIS account",
-  free:"Get started with JARVIS AS for free.",
-  pro:"More possibilities and advanced creative tools.",
-  owner:"Special owner account.",
-  coming:"Account registration is coming in a future version.",
-  ready:"Ready for the future?",
-  top:"BACK TO TOP"
+  accountTitle:"Choose your JARVIS account"
  },
- de: {
-  home:"Startseite",features:"Funktionen",accounts:"Konten",
+ de:{
   intro:"Entdecke JARVIS AS – deine persönliche KI-Plattform zum Chatten, Erstellen und Entdecken.",
   discover:"JARVIS AS ENTDECKEN",
   featureTitle:"Was kann JARVIS AS?",
-  featureIntro:"Eine Plattform für deine Ideen und Projekte.",
-  ai:"Chatte, stelle Fragen und arbeite mit deiner KI.",
-  create:"Erstelle Bilder, Designs und kreative Projekte.",
-  game:"Entwickle Spielkonzepte, Charaktere und 3D-Assets.",
-  projects:"Organisiere deine Ideen und Projekte.",
-  accountTitle:"Wähle dein JARVIS-Konto",
-  free:"Starte kostenlos mit JARVIS AS.",
-  pro:"Mehr Möglichkeiten und erweiterte Kreativwerkzeuge.",
-  owner:"Spezielles Besitzerkonto.",
-  coming:"Die Registrierung kommt in einer späteren Version.",
-  ready:"Bereit für die Zukunft?",
-  top:"ZURÜCK NACH OBEN"
+  accountTitle:"Wähle dein JARVIS-Konto"
  }
 };
 
-const language = document.getElementById("language");
+const language=document.getElementById("language");
 
-function setLanguage(lang) {
- document.documentElement.lang = lang;
-
- document.querySelectorAll("[data-i]").forEach(el => {
-  const key = el.dataset.i;
-  if (translations[lang][key]) {
-   el.textContent = translations[lang][key];
-  }
+function setLanguage(lang){
+ const selected=translations[lang]||translations.nl;
+ document.documentElement.lang=lang;
+ document.querySelectorAll("[data-i]").forEach(el=>{
+  const key=el.dataset.i;
+  if(selected[key])el.textContent=selected[key];
  });
+ try{localStorage.setItem("jarvis-language",lang)}catch(e){}
 }
 
-language.addEventListener("change", e => {
- setLanguage(e.target.value);
-});
+try{
+ const saved=localStorage.getItem("jarvis-language");
+ if(saved&&translations[saved]){
+  language.value=saved;
+  setLanguage(saved);
+ }
+}catch(e){}
 
-document.getElementById("theme").addEventListener("click", () => {
+language.addEventListener("change",e=>setLanguage(e.target.value));
+
+document.getElementById("theme").addEventListener("click",()=>{
  document.body.classList.toggle("light");
-
- document.getElementById("theme").textContent =
-  document.body.classList.contains("light") ? "☾" : "☀";
+ const light=document.body.classList.contains("light");
+ document.getElementById("theme").textContent=light?"☾":"☀";
+ try{localStorage.setItem("jarvis-theme",light?"light":"dark")}catch(e){}
 });
+
+try{
+ if(localStorage.getItem("jarvis-theme")==="light"){
+  document.body.classList.add("light");
+  document.getElementById("theme").textContent="☾";
+ }
+}catch(e){}
 </script>
 
 </body>
