@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS AS | Projects</title>
+<style>
+:root{
+ --bg:#080f1c;
+ --panel:#101d30;
+ --panel2:#152842;
+ --text:#f3f7ff;
+ --muted:#a8bad0;
+ --blue:#55baff;
+ --border:#263c56;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:Arial,sans-serif;
+}
+header{
+ padding:18px 5%;
+ border-bottom:1px solid var(--border);
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+ flex-wrap:wrap;
+}
+.logo{font-size:21px;font-weight:bold;letter-spacing:2px}
+.logo span{color:var(--blue)}
+a{color:var(--blue);text-decoration:none}
+button{
+ background:var(--panel2);
+ color:var(--text);
+ border:1px solid var(--border);
+ padding:11px 16px;
+ border-radius:9px;
+ cursor:pointer;
+}
+button:hover{border-color:var(--blue)}
+main{max-width:1050px;margin:auto;padding:35px 20px}
+h1{font-size:38px;margin-bottom:8px}
+p{color:var(--muted);line-height:1.6}
+.panel{
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:15px;
+ padding:22px;
+ margin:25px 0;
+}
+input,textarea{
+ width:100%;
+ padding:13px;
+ margin:8px 0;
+ border-radius:8px;
+ border:1px solid var(--border);
+ background:var(--bg);
+ color:var(--text);
+ font:inherit;
+}
+textarea{min-height:90px;resize:vertical}
+.primary{
+ background:var(--blue);
+ color:#061322;
+ border:0;
+ font-weight:bold;
+}
+.projects{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+ gap:16px;
+}
+.project{
+ background:var(--panel);
+ border:1px solid var(--border);
+ padding:20px;
+ border-radius:13px;
+}
+.project h3{margin-top:0}
+.project small{color:var(--muted)}
+.delete{color:#ff7777;margin-top:12px}
+.empty{
+ padding:30px;
+ text-align:center;
+ border:1px dashed var(--border);
+ border-radius:12px;
+ color:var(--muted);
+}
+footer{
+ text-align:center;
+ padding:30px;
+ border-top:1px solid var(--border);
+ color:var(--muted);
+ margin-top:50px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <a href="index.html" class="logo">◉ JARVIS <span>AS</span></a>
+ <nav>
+  <a href="dashboard.html">Dashboard</a> ·
+  <a href="chats.html">Chats</a> ·
+  <a href="browser.html">Browser</a> ·
+  <a href="settings.html">Settings</a> ·
+  <a href="index.html">Home</a>
+ </nav>
+</header>
+
+<main>
+ <h1>My Projects</h1>
+ <p>Your ideas. Your plans. Your world.</p>
+ <p>
+  Maak projecten aan, bewaar je ideeën en houd je werk bij elkaar.
+  Dit is de eerste versie van de JARVIS AS Projects Workspace.
+ </p>
+
+ <section class="panel">
+  <h2>+ Create a Project</h2>
+  <p>Geef je project een naam en beschrijf waar het over gaat.</p>
+
+  <form id="projectForm">
+   <label for="projectName">Project name</label>
+   <input id="projectName" maxlength="60"
+    placeholder="Bijvoorbeeld: My Game" required>
+
+   <label for="projectDescription">Description</label>
+   <textarea id="projectDescription" maxlength="500"
+    placeholder="Wat wil je met dit project maken?"></textarea>
+
+   <button class="primary" type="submit">Create Project</button>
+  </form>
+ </section>
+
+ <section>
+  <h2>Your Projects</h2>
+  <p id="projectCount">0 projects</p>
+  <div id="projectList" class="projects"></div>
+ </section>
+
+ <section class="panel">
+  <h2>Future Project Tools</h2>
+  <p>Deze functies willen we later toevoegen:</p>
+  <ul>
+   <li>Projectbestanden uploaden en beheren.</li>
+   <li>Met JARVIS aan een project werken.</li>
+   <li>Projecten delen met andere gebruikers.</li>
+   <li>Projectgeschiedenis en versies bekijken.</li>
+   <li>Projecten koppelen aan JARVIS Game Studio.</li>
+   <li>Projecten synchroniseren tussen apparaten.</li>
+  </ul>
+  <p>Deze mogelijkheden zijn nog in ontwikkeling.</p>
+ </section>
+</main>
+
+<footer>
+ JARVIS AS · Projects Workspace · 2026
+</footer>
+
+<script>
+const form=document.getElementById("projectForm");
+const list=document.getElementById("projectList");
+const count=document.getElementById("projectCount");
+
+let projects=[];
+
+try{
+ projects=JSON.parse(localStorage.getItem("jarvis-projects")||"[]");
+ if(!Array.isArray(projects))projects=[];
+}catch(error){
+ projects=[];
+}
+
+function saveProjects(){
+ try{
+  localStorage.setItem("jarvis-projects",JSON.stringify(projects));
+ }catch(error){
+  alert("Projects konden niet worden opgeslagen in deze browser.");
+ }
+}
+
+function renderProjects(){
+ list.innerHTML="";
+ count.textContent=projects.length+
+  (projects.length===1?" project":" projects");
+
+ if(projects.length===0){
+  list.innerHTML='<div class="empty">No projects yet. Create your first project!</div>';
+  return;
+ }
+
+ projects.forEach((project,index)=>{
+  const card=document.createElement("article");
+  card.className="project";
+
+  const title=document.createElement("h3");
+  title.textContent=project.name;
+
+  const description=document.createElement("p");
+  description.textContent=project.description||"No description added.";
+
+  const date=document.createElement("small");
+  date.textContent="Created: "+project.date;
+
+  const remove=document.createElement("button");
+  remove.className="delete";
+  remove.textContent="Delete Project";
+  remove.addEventListener("click",()=>{
+   if(confirm("Delete this project?")){
+    projects.splice(index,1);
+    saveProjects();
+    renderProjects();
+   }
+  });
+
+  card.append(title,description,date,document.createElement("br"),remove);
+  list.appendChild(card);
+ });
+}
+
+form.addEventListener("submit",event=>{
+ event.preventDefault();
+
+ const name=document.getElementById("projectName").value.trim();
+ const description=document.getElementById("projectDescription").value.trim();
+
+ if(!name)return;
+
+ projects.unshift({
+  name:name,
+  description:description,
+  date:new Date().toLocaleDateString()
+ });
+
+ saveProjects();
+ renderProjects();
+ form.reset();
+});
+
+renderProjects();
+</script>
+
+</body>
+</html>
