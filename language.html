@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS AS - Select Language</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080d18;
+    color: white;
+    min-height: 100vh;
+    padding: 25px;
+}
+
+.container {
+    max-width: 850px;
+    margin: 40px auto;
+    background: #111b2d;
+    border: 1px solid #263c5b;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 30px #087bff18;
+}
+
+.logo {
+    color: #54aaff;
+    font-size: 15px;
+    letter-spacing: 4px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #aabbd0;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.search {
+    width: 100%;
+    padding: 15px;
+    background: #091322;
+    border: 1px solid #345071;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+.search:focus {
+    border-color: #48a5ff;
+}
+
+.auto {
+    background: #142944;
+    border: 1px solid #3977b7;
+    padding: 17px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.auto label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.auto input {
+    width: 18px;
+    height: 18px;
+}
+
+.section-title {
+    color: #75baff;
+    margin: 20px 0 12px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.language-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+}
+
+.language {
+    background: #0b1728;
+    border: 1px solid #263c5b;
+    border-radius: 10px;
+    padding: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.language:hover {
+    border-color: #49a7ff;
+    background: #142944;
+}
+
+.language.selected {
+    border-color: #4aa8ff;
+    background: #16375c;
+}
+
+.language input {
+    accent-color: #2999ff;
+    width: 17px;
+    height: 17px;
+}
+
+.language-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.language-info strong {
+    font-size: 14px;
+}
+
+.language-info small {
+    color: #9eb3ca;
+}
+
+.selected-box {
+    background: #0b1728;
+    border: 1px solid #263c5b;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: #b9d7f5;
+    line-height: 1.6;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    background: #1689f5;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0872d6;
+}
+
+.message {
+    color: #72dba0;
+    text-align: center;
+    margin-top: 15px;
+    min-height: 20px;
+}
+
+.back {
+    display: inline-block;
+    color: #7bbcff;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.back:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+    body { padding: 12px; }
+    .container { padding: 20px; margin: 15px auto; }
+    h1 { font-size: 26px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">JARVIS AS</div>
+
+    <h1>Select Language</h1>
+
+    <p class="description">
+        Choose the language JARVIS should use.
+        You can select multiple languages or let JARVIS
+        recognize your language automatically.
+    </p>
+
+    <input
+        type="text"
+        class="search"
+        id="search"
+        placeholder="Search language, native name or country..."
+        oninput="filterLanguages()"
+    >
+
+    <div class="auto">
+        <label>
+            <input type="checkbox" id="automatic">
+            <span>
+                <strong>Automatic language recognition</strong><br>
+                <small>JARVIS detects the language you are using.</small>
+            </span>
+        </label>
+    </div>
+
+    <div class="section-title">Available languages</div>
+
+    <div class="language-list" id="languageList">
+
+        <label class="language" data-search="dutch nederlands nederland">
+            <input type="checkbox" value="Dutch">
+            <span class="language-info">
+                <strong>Nederlands</strong>
+                <small>Dutch · Netherlands</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="english engels united kingdom usa america">
+            <input type="checkbox" value="English">
+            <span class="language-info">
+                <strong>English</strong>
+                <small>English · United Kingdom / USA</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="german deutsch deutschland duitsland">
+            <input type="checkbox" value="German">
+            <span class="language-info">
+                <strong>Deutsch</strong>
+                <small>German · Deutschland</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="french français france frans">
+            <input type="checkbox" value="French">
+            <span class="language-info">
+                <strong>Français</strong>
+                <small>French · France</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="spanish español españa spanje">
+            <input type="checkbox" value="Spanish">
+            <span class="language-info">
+                <strong>Español</strong>
+                <small>Spanish · España</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="italian italiano italia italie">
+            <input type="checkbox" value="Italian">
+            <span class="language-info">
+                <strong>Italiano</strong>
+                <small>Italian · Italia</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="portuguese português portugal brazil brazilië">
+            <input type="checkbox" value="Portuguese">
+            <span class="language-info">
+                <strong>Português</strong>
+                <small>Portuguese · Portugal / Brazil</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="polish polski polen">
+            <input type="checkbox" value="Polish">
+            <span class="language-info">
+                <strong>Polski</strong>
+                <small>Polish · Polska</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="russian русский rusland">
+            <input type="checkbox" value="Russian">
+            <span class="language-info">
+                <strong>Русский</strong>
+                <small>Russian · Россия</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="ukrainian українська oekraïne">
+            <input type="checkbox" value="Ukrainian">
+            <span class="language-info">
+                <strong>Українська</strong>
+                <small>Ukrainian · Україна</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="arabic العربية saudi arabia">
+            <input type="checkbox" value="Arabic">
+            <span class="language-info">
+                <strong>العربية</strong>
+                <small>Arabic · الشرق الأوسط</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="chinese 中文 mandarin china">
+            <input type="checkbox" value="Chinese">
+            <span class="language-info">
+                <strong>中文</strong>
+                <small>Chinese · 中国</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="japanese 日本語 japan">
+            <input type="checkbox" value="Japanese">
+            <span class="language-info">
+                <strong>日本語</strong>
+                <small>Japanese · 日本</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="korean 한국어 south korea korea">
+            <input type="checkbox" value="Korean">
+            <span class="language-info">
+                <strong>한국어</strong>
+                <small>Korean · 대한민국</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="turkish türkçe turkije">
+            <input type="checkbox" value="Turkish">
+            <span class="language-info">
+                <strong>Türkçe</strong>
+                <small>Turkish · Türkiye</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="hindi हिन्दी india">
+            <input type="checkbox" value="Hindi">
+            <span class="language-info">
+                <strong>हिन्दी</strong>
+                <small>Hindi · भारत</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="greek ελληνικά griekenland">
+            <input type="checkbox" value="Greek">
+            <span class="language-info">
+                <strong>Ελληνικά</strong>
+                <small>Greek · Ελλάδα</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="swedish svenska zweden">
+            <input type="checkbox" value="Swedish">
+            <span class="language-info">
+                <strong>Svenska</strong>
+                <small>Swedish · Sverige</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="norwegian norsk noorwegen">
+            <input type="checkbox" value="Norwegian">
+            <span class="language-info">
+                <strong>Norsk</strong>
+                <small>Norwegian · Norge</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="danish dansk denemarken">
+            <input type="checkbox" value="Danish">
+            <span class="language-info">
+                <strong>Dansk</strong>
+                <small>Danish · Danmark</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="finnish suomi finland">
+            <input type="checkbox" value="Finnish">
+            <span class="language-info">
+                <strong>Suomi</strong>
+                <small>Finnish · Suomi</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="indonesian bahasa indonesia indonesië">
+            <input type="checkbox" value="Indonesian">
+            <span class="language-info">
+                <strong>Bahasa Indonesia</strong>
+                <small>Indonesian · Indonesia</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="thai ภาษาไทย thailand">
+            <input type="checkbox" value="Thai">
+            <span class="language-info">
+                <strong>ภาษาไทย</strong>
+                <small>Thai · ประเทศไทย</small>
+            </span>
+        </label>
+
+        <label class="language" data-search="vietnamese tiếng việt vietnam">
+            <input type="checkbox" value="Vietnamese">
+            <span class="language-info">
+                <strong>Tiếng Việt</strong>
+                <small>Vietnamese · Việt Nam</small>
+            </span>
+        </label>
+
+    </div>
+
+    <div class="selected-box">
+        <strong>Selected languages:</strong>
+        <div id="selected">No language selected yet.</div>
+    </div>
+
+    <button onclick="saveLanguages()">Save language settings</button>
+
+    <div class="message" id="message"></div>
+
+    <a class="back" href="index.html">← Back to homepage</a>
+
+</div>
+
+<script>
+const search = document.getElementById("search");
+const automatic = document.getElementById("automatic");
+const checkboxes = document.querySelectorAll(".language input");
+
+function filterLanguages() {
+    const query = search.value.toLowerCase().trim();
+
+    document.querySelectorAll(".language").forEach(item => {
+        const text = item.dataset.search.toLowerCase();
+        item.style.display = text.includes(query) ? "flex" : "none";
+    });
+}
+
+function updateSelected() {
+    const selected = [...checkboxes]
+        .filter(box => box.checked)
+        .map(box => box.value);
+
+    document.getElementById("selected").textContent =
+        selected.length ? selected.join(", ") : "No language selected yet.";
+
+    document.querySelectorAll(".language").forEach(item => {
+        const checkbox = item.querySelector("input");
+        item.classList.toggle("selected", checkbox.checked);
+    });
+}
+
+checkboxes.forEach(box => {
+    box.addEventListener("change", () => {
+        if (box.checked) automatic.checked = false;
+        updateSelected();
+    });
+});
+
+automatic.addEventListener("change", () => {
+    if (automatic.checked) {
+        checkboxes.forEach(box => box.checked = false);
+        updateSelected();
+    }
+});
+
+function saveLanguages() {
+    const selected = [...checkboxes]
+        .filter(box => box.checked)
+        .map(box => box.value);
+
+    if (!automatic.checked && selected.length === 0) {
+        document.getElementById("message").textContent =
+            "Please select at least one language.";
+        return;
+    }
+
+    const settings = {
+        automatic: automatic.checked,
+        languages: selected
+    };
+
+    localStorage.setItem("jarvisLanguages", JSON.stringify(settings));
+
+    document.getElementById("message").textContent =
+        "Language preferences saved on this device!";
+}
+
+window.addEventListener("load", () => {
+    const saved = localStorage.getItem("jarvisLanguages");
+
+    if (saved) {
+        const settings = JSON.parse(saved);
+        automatic.checked = settings.automatic;
+
+        checkboxes.forEach(box => {
+            box.checked = settings.languages.includes(box.value);
+        });
+
+        updateSelected();
+    }
+});
+</script>
+
+</body>
+</html>
