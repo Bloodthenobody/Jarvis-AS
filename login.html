@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080f1c">
+<title>Login | JARVIS AS</title>
+<style>
+:root {
+ --bg:#080f1c;
+ --panel:#101d30;
+ --text:#f3f7ff;
+ --muted:#a8bad0;
+ --blue:#55baff;
+ --border:#263c56;
+}
+body.light {
+ --bg:#eef4fb;
+ --panel:#fff;
+ --text:#142238;
+ --muted:#53677f;
+ --blue:#087cc5;
+ --border:#cbd8e7;
+}
+* {box-sizing:border-box}
+body {
+ margin:0;
+ min-height:100vh;
+ font-family:Arial,sans-serif;
+ background:radial-gradient(ellipse at top,#15365a,var(--bg) 65%);
+ background-color:var(--bg);
+ color:var(--text);
+ display:flex;
+ flex-direction:column;
+}
+header {
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:18px 6%;
+ border-bottom:1px solid var(--border);
+ background:var(--bg);
+}
+.logo {
+ font-size:21px;
+ font-weight:bold;
+ letter-spacing:2px;
+}
+.logo span {color:var(--blue)}
+header a {color:var(--muted);text-decoration:none}
+button,input,select {
+ font:inherit;
+}
+button {
+ cursor:pointer;
+ border:1px solid var(--border);
+ border-radius:10px;
+ padding:12px;
+ color:var(--text);
+ background:var(--panel);
+}
+button:hover {border-color:var(--blue)}
+main {
+ width:min(440px,92%);
+ margin:auto;
+ padding:45px 0;
+}
+.panel {
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:20px;
+ padding:30px;
+ box-shadow:0 0 35px #2588cc18;
+}
+.brand {
+ text-align:center;
+ margin-bottom:25px;
+}
+.core {
+ width:75px;
+ height:75px;
+ margin:auto;
+ border:2px solid var(--blue);
+ border-radius:50%;
+ display:grid;
+ place-items:center;
+ font-size:40px;
+ font-weight:bold;
+ box-shadow:0 0 25px var(--blue);
+}
+h1 {text-align:center;font-size:27px}
+p {color:var(--muted);line-height:1.6}
+.subtitle {text-align:center;font-size:14px}
+.tabs {
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:8px;
+ margin:22px 0;
+}
+.tabs button.active {
+ background:var(--blue);
+ color:#061322;
+ border-color:var(--blue);
+ font-weight:bold;
+}
+.field {margin:16px 0}
+label {
+ display:block;
+ margin-bottom:7px;
+ font-size:13px;
+ color:var(--muted);
+}
+input,select {
+ width:100%;
+ padding:13px;
+ background:var(--bg);
+ color:var(--text);
+ border:1px solid var(--border);
+ border-radius:9px;
+}
+.primary {
+ width:100%;
+ background:var(--blue);
+ color:#061322;
+ border:0;
+ font-weight:bold;
+ margin-top:10px;
+}
+.google {
+ width:100%;
+ margin-top:10px;
+}
+.divider {
+ display:flex;
+ align-items:center;
+ gap:12px;
+ color:var(--muted);
+ font-size:12px;
+ margin:20px 0;
+}
+.divider:before,.divider:after {
+ content:"";
+ flex:1;
+ height:1px;
+ background:var(--border);
+}
+.hidden {display:none}
+.small {
+ text-align:center;
+ font-size:12px;
+}
+.message {
+ display:none;
+ padding:12px;
+ margin-top:14px;
+ border:1px solid var(--border);
+ border-radius:9px;
+ color:var(--muted);
+ font-size:13px;
+}
+footer {
+ text-align:center;
+ padding:20px;
+ color:var(--muted);
+ font-size:12px;
+}
+</style>
+</head>
+<body>
+
+<header>
+ <a href="index.html" class="logo">◉ JARVIS <span>AS</span></a>
+ <button id="theme">☀</button>
+</header>
+
+<main>
+ <div class="panel">
+
+  <div class="brand">
+   <div class="core">J</div>
+   <h1>Welcome to JARVIS AS</h1>
+   <p class="subtitle">Your AI. Your World.</p>
+  </div>
+
+  <div class="tabs">
+   <button id="loginTab" class="active" type="button">Log in</button>
+   <button id="registerTab" type="button">Register</button>
+  </div>
+
+  <form id="authForm">
+   <div class="field hidden" id="accountField">
+    <label for="accountType">Account type</label>
+    <select id="accountType">
+     <option value="personal">Personal Account</option>
+     <option value="student">Student Account</option>
+     <option value="family">Family Account</option>
+    </select>
+   </div>
+
+   <div class="field">
+    <label for="method">Login method</label>
+    <select id="method">
+     <option value="email">Email address</option>
+     <option value="phone">Phone number</option>
+    </select>
+   </div>
+
+   <div class="field" id="emailField">
+    <label for="email">Email address</label>
+    <input id="email" type="email"
+      placeholder="name@example.com" autocomplete="email">
+   </div>
+
+   <div class="field hidden" id="phoneField">
+    <label for="phone">Phone number</label>
+    <input id="phone" type="tel"
+      placeholder="+31 6 12345678" autocomplete="tel">
+   </div>
+
+   <div class="field hidden" id="nameField">
+    <label for="name">Your name</label>
+    <input id="name" type="text" placeholder="Your name">
+   </div>
+
+   <div class="field" id="passwordField">
+    <label for="password">Password</label>
+    <input id="password" type="password"
+      placeholder="Your password" autocomplete="current-password">
+   </div>
+
+   <div class="field hidden" id="confirmField">
+    <label for="confirm">Confirm password</label>
+    <input id="confirm" type="password"
+      placeholder="Repeat your password">
+   </div>
+
+   <button class="primary" type="submit" id="submitButton">
+    LOG IN
+   </button>
+  </form>
+
+  <div class="divider">OR</div>
+
+  <button class="google" id="googleButton" type="button">
+   G Continue with Google
+  </button>
+
+  <div id="message" class="message" role="status"></div>
+
+  <p class="small">
+   By continuing, you agree to the JARVIS AS terms and privacy policy.
+  </p>
+
+  <p class="small">
+   <a href="index.html" style="color:var(--blue)">← Back to homepage</a>
+  </p>
+ </div>
+</main>
+
+<footer>© 2026 JARVIS AS · Artificial Support</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+
+let mode = "login";
+
+function showMessage(text) {
+ $("message").textContent = text;
+ $("message").style.display = "block";
+}
+
+function setMode(newMode) {
+ mode = newMode;
+
+ $("loginTab").classList.toggle("active",mode==="login");
+ $("registerTab").classList.toggle("active",mode==="register");
+
+ $("accountField").classList.toggle("hidden",mode==="login");
+ $("nameField").classList.toggle("hidden",mode==="login");
+ $("confirmField").classList.toggle("hidden",mode==="login");
+
+ $("submitButton").textContent =
+  mode==="login" ? "LOG IN" : "CREATE ACCOUNT";
+
+ $("password").autocomplete =
+  mode==="login" ? "current-password" : "new-password";
+
+ $("message").style.display="none";
+}
+
+function updateMethod() {
+ const phone = $("method").value==="phone";
+
+ $("emailField").classList.toggle("hidden",phone);
+ $("phoneField").classList.toggle("hidden",!phone);
+
+ $("passwordField").classList.toggle("hidden",phone);
+ $("submitButton").textContent =
+  phone ? "SEND VERIFICATION CODE" :
+  mode==="login" ? "LOG IN" : "CREATE ACCOUNT";
+}
+
+$("loginTab").onclick=()=>setMode("login");
+$("registerTab").onclick=()=>setMode("register");
+$("method").onchange=updateMethod;
+
+$("authForm").onsubmit=e=>{
+ e.preventDefault();
+
+ if($("method").value==="phone") {
+  showMessage(
+   "Phone verification is not connected yet. A secure authentication service is needed."
+  );
+  return;
+ }
+
+ if(mode==="register" &&
+    $("password").value!==$("confirm").value) {
+  showMessage("The passwords do not match.");
+  return;
+ }
+
+ showMessage(
+  "This is a website prototype. Secure account registration and login will be connected in a later version."
+ );
+};
+
+$("googleButton").onclick=()=>{
+ showMessage(
+  "Google sign-in will be available after secure authentication is connected."
+ );
+};
+
+$("theme").onclick=()=>{
+ document.body.classList.toggle("light");
+ $("theme").textContent =
+  document.body.classList.contains("light") ? "☾" : "☀";
+};
+</script>
+
+</body>
+</html>
