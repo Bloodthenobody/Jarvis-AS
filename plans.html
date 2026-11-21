@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS AS - Plans</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080d18;
+    color: white;
+    padding: 25px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 35px auto;
+}
+
+.logo {
+    color: #54aaff;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: #aabbd0;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+
+.plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.plan {
+    background: #111b2d;
+    border: 1px solid #263c5b;
+    border-radius: 17px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.plan.pro {
+    border-color: #1689f5;
+    box-shadow: 0 0 25px #1689f522;
+}
+
+.plan.owner {
+    border-color: #b18aff;
+}
+
+.plan h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 34px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.price small {
+    font-size: 14px;
+    color: #9eb3ca;
+}
+
+.description {
+    color: #aabbd0;
+    min-height: 45px;
+    line-height: 1.5;
+}
+
+ul {
+    list-style: none;
+    margin: 20px 0;
+    flex: 1;
+}
+
+li {
+    padding: 9px 0;
+    border-bottom: 1px solid #26364c;
+    color: #d5e3f3;
+    font-size: 14px;
+}
+
+li::before {
+    content: "✓ ";
+    color: #54baff;
+    font-weight: bold;
+}
+
+.plan button {
+    width: 100%;
+    padding: 14px;
+    background: #1689f5;
+    border: none;
+    color: white;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.plan button:hover {
+    background: #0872d6;
+}
+
+.owner button {
+    background: #8257d5;
+}
+
+.owner button:hover {
+    background: #7044c5;
+}
+
+.account-section {
+    margin-top: 45px;
+    padding: 25px;
+    background: #111b2d;
+    border: 1px solid #263c5b;
+    border-radius: 15px;
+}
+
+.account-section h2 {
+    margin-bottom: 15px;
+}
+
+.account-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.account-type {
+    padding: 17px;
+    background: #0b1728;
+    border: 1px solid #263c5b;
+    border-radius: 10px;
+}
+
+.account-type h3 {
+    margin-bottom: 8px;
+    color: #75baff;
+}
+
+.account-type p {
+    color: #aabbd0;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.note {
+    margin-top: 25px;
+    color: #8da3bd;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 25px;
+    color: #7bbcff;
+    text-decoration: none;
+}
+
+.back:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">JARVIS AS</div>
+
+    <h1>Choose your JARVIS plan.</h1>
+
+    <p class="subtitle">
+        Start for free or upgrade your experience with JARVIS Pro.
+        Choose the account type that works best for you.
+    </p>
+
+    <div class="plans">
+
+        <div class="plan">
+            <h2>JARVIS Free</h2>
+            <p class="description">Start using your personal AI assistant.</p>
+
+            <div class="price">€0 <small>/ month</small></div>
+
+            <ul>
+                <li>AI assistant</li>
+                <li>Basic AI creation tools</li>
+                <li>Up to 20 photo actions</li>
+                <li>Chats and projects</li>
+                <li>Multiple AI personalities</li>
+                <li>Basic Game Studio features</li>
+            </ul>
+
+            <button onclick="choosePlan('Free')">
+                Choose Free
+            </button>
+        </div>
+
+        <div class="plan pro">
+            <h2>JARVIS Pro</h2>
+            <p class="description">More creative tools and more profiles.</p>
+
+            <div class="price">€5 <small>/ month</small></div>
+
+            <ul>
+                <li>Everything in Free</li>
+                <li>Expanded AI creation tools</li>
+                <li>No fixed monthly photo-action quota</li>
+                <li>3D model creation</li>
+                <li>Advanced Game Studio tools</li>
+                <li>More creation options</li>
+                <li>Double profile limits</li>
+            </ul>
+
+            <button onclick="choosePlan('Pro')">
+                Choose Pro
+            </button>
+        </div>
+
+        <div class="plan owner">
+            <h2>JARVIS OAI Owner</h2>
+            <p class="description">Special owner account for the JARVIS creator.</p>
+
+            <div class="price">€0 <small>/ month</small></div>
+
+            <ul>
+                <li>Pro features included</li>
+                <li>Access to available owner tools</li>
+                <li>Owner dashboard</li>
+                <li>Advanced configuration</li>
+                <li>Development tools</li>
+                <li>Special owner account</li>
+            </ul>
+
+            <button onclick="choosePlan('Owner')">
+                Owner account
+            </button>
+        </div>
+
+    </div>
+
+    <div class="account-section">
+
+        <h2>Choose your account type</h2>
+
+        <div class="account-grid">
+
+            <div class="account-type">
+                <h3>Personal Account</h3>
+                <p>
+                    Free: 2 profiles<br>
+                    Pro: 4 profiles
+                </p>
+            </div>
+
+            <div class="account-type">
+                <h3>Student Account</h3>
+                <p>
+                    Free: 2 profiles<br>
+                    Pro: 4 profiles
+                </p>
+            </div>
+
+            <div class="account-type">
+                <h3>Family Account</h3>
+                <p>
+                    Free: 6 profiles<br>
+                    Pro: 12 profiles
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <p class="note">
+        Prices are displayed in euros. JARVIS Pro is €5 per month
+        or US$6 per month. Creation features remain subject to
+        technical capacity and fair-use limits. The Owner account
+        is a special account and is not available for public purchase.
+        This page is currently a visual prototype; payments and
+        subscription management are not connected yet.
+    </p>
+
+    <a href="index.html" class="back">← Back to homepage</a>
+
+</div>
+
+<script>
+function choosePlan(plan) {
+    if (plan === "Owner") {
+        alert("The JARVIS OAI Owner account is reserved for the owner.");
+        return;
+    }
+
+    if (plan === "Free") {
+        alert("JARVIS Free selected! Account registration will be connected later.");
+        return;
+    }
+
+    if (plan === "Pro") {
+        alert("JARVIS Pro selected! Payment setup will be connected later.");
+    }
+}
+</script>
+
+</body>
+</html>
