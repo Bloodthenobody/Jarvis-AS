@@ -295,22 +295,37 @@ footer {
     JARVIS AS · AI Control Center · Prototype
 </footer>
 
+
+<script src="ai-config.js"></script>
+
 <script>
 function selectAI(name) {
-    localStorage.setItem("jarvis_selected_ai", name);
+    const personality = getAIPersonality(name);
 
-    const message = name === "ULTRON"
-        ? "ULTRON is geselecteerd. Zijn rode interface en persoonlijkheid worden verder ontwikkeld."
-        : "JARVIS is geselecteerd. Je vertrouwde assistent staat klaar.";
+    localStorage.setItem("jarvis_selected_ai", personality.name);
 
-    document.getElementById("selectedAI").textContent = message;
+    const display = document.getElementById("selectedAI");
+
+    display.textContent =
+        personality.name + " is geselecteerd. " +
+        personality.style;
+
+    display.style.color = personality.color;
 }
 
-const savedAI = localStorage.getItem("jarvis_selected_ai") || "JARVIS";
+const savedAI =
+    localStorage.getItem("jarvis_selected_ai") || "JARVIS";
+
+const selectedPersonality = getAIPersonality(savedAI);
 
 document.getElementById("selectedAI").textContent =
-    savedAI + " is momenteel geselecteerd.";
+    selectedPersonality.name + " is momenteel geselecteerd. " +
+    selectedPersonality.style;
+
+document.getElementById("selectedAI").style.color =
+    selectedPersonality.color;
 </script>
+
 
 </body>
 </html>
