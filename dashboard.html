@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS AS - Dashboard</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080d18;
+    color: white;
+    min-height: 100vh;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 220px 1fr 260px;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background: #0d1728;
+    border-right: 1px solid #263c5b;
+    padding: 22px 15px;
+}
+
+.logo {
+    color: #54aaff;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin: 8px 5px 30px;
+}
+
+.nav-title {
+    color: #7189a5;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin: 22px 8px 10px;
+}
+
+.nav button {
+    width: 100%;
+    background: transparent;
+    color: #c4d4e7;
+    border: none;
+    text-align: left;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.nav button:hover,
+.nav button.active {
+    background: #18375b;
+    color: white;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 100vh;
+}
+
+.topbar {
+    height: 70px;
+    border-bottom: 1px solid #263c5b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    gap: 12px;
+}
+
+.search {
+    background: #111b2d;
+    border: 1px solid #263c5b;
+    color: white;
+    border-radius: 9px;
+    padding: 11px 14px;
+    width: min(350px, 55%);
+}
+
+.profile {
+    color: #8fc6ff;
+    font-size: 13px;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 20px 20px;
+}
+
+.reactor {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #238bff;
+    box-shadow: 0 0 15px #1689f5, 0 0 45px #1689f577;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 25px;
+    animation: pulse 3s infinite;
+}
+
+.reactor::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 3px solid #80c9ff;
+    border-radius: 50%;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    animation: rotate 5s linear infinite;
+}
+
+.reactor::after {
+    content: "";
+    position: absolute;
+    width: 95px;
+    height: 95px;
+    border: 2px solid #b1dcff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: rotate 3s linear infinite reverse;
+}
+
+.reactor span {
+    font-size: 42px;
+    font-weight: bold;
+    color: #c6e7ff;
+    z-index: 1;
+}
+
+@keyframes rotate {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    50% {
+        box-shadow: 0 0 30px #1689f5, 0 0 70px #1689f577;
+    }
+}
+
+h1 {
+    font-size: 25px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.status {
+    color: #72baff;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.chat {
+    width: 100%;
+    max-width: 750px;
+    flex: 1;
+    min-height: 220px;
+    background: #0d1728;
+    border: 1px solid #263c5b;
+    border-radius: 14px;
+    padding: 18px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.message {
+    background: #162a44;
+    padding: 13px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    max-width: 90%;
+    overflow-wrap: anywhere;
+}
+
+.message.user {
+    background: #164d7d;
+    margin-left: auto;
+}
+
+.message.ai {
+    border-left: 3px solid #2999ff;
+}
+
+.input-area {
+    width: 100%;
+    max-width: 750px;
+    display: flex;
+    gap: 10px;
+}
+
+.input-area input {
+    flex: 1;
+    min-width: 0;
+    background: #111b2d;
+    border: 1px solid #345071;
+    border-radius: 10px;
+    color: white;
+    padding: 15px;
+    outline: none;
+}
+
+.input-area button {
+    background: #1689f5;
+    border: none;
+    color: white;
+    padding: 0 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.rightbar {
+    background: #0d1728;
+    border-left: 1px solid #263c5b;
+    padding: 22px 15px;
+}
+
+.widget {
+    background: #111e31;
+    border: 1px solid #263c5b;
+    padding: 16px;
+    border-radius: 11px;
+    margin-bottom: 15px;
+}
+
+.widget h3 {
+    color: #83c1ff;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.widget p {
+    color: #aabbd0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.widget button {
+    background: transparent;
+    border: none;
+    color: #9acbff;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+@media(max-width: 950px) {
+    .app {
+        grid-template-columns: 180px 1fr;
+    }
+    .rightbar {
+        display: none;
+    }
+}
+
+@media(max-width: 600px) {
+    .app {
+        display: block;
+    }
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid #263c5b;
+    }
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .nav-title {
+        display: none;
+    }
+    .nav button {
+        width: auto;
+    }
+    .topbar {
+        padding: 0 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">JARVIS AS</div>
+
+        <div class="nav">
+
+            <div class="nav-title">WORKSPACE</div>
+            <button class="active">◈ Chats</button>
+            <button>✦ Memory</button>
+            <button>◎ Browser</button>
+            <button>▣ Projects</button>
+
+            <div class="nav-title">PRODUCTIVITY</div>
+            <button>▦ Calendar</button>
+            <button>♧ Notifications</button>
+            <button>⌘ Connect</button>
+
+            <div class="nav-title">CREATION</div>
+            <button>✧ Create</button>
+            <button>◉ Game Studio</button>
+
+            <div class="nav-title">PERSONAL</div>
+            <button>☀ Daily</button>
+            <button onclick="location.href='settings.html'">⚙ Settings</button>
+
+        </div>
+
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <input class="search" type="search"
+                placeholder="Search JARVIS...">
+
+            <div class="profile">● My Profile</div>
+
+        </header>
+
+        <section class="content">
+
+            <div class="reactor" id="reactor">
+                <span id="reactorLetter">J</span>
+            </div>
+
+            <h1 id="welcome">Good day. I am JARVIS.</h1>
+            <div class="status" id="status">● SYSTEM ONLINE</div>
+
+            <div class="chat" id="chat">
+
+                <div class="message ai">
+                    Hello! I am your JARVIS assistant.
+                    What would you like to work on today?
+                </div>
+
+            </div>
+
+            <div class="input-area">
+
+                <input type="text" id="userInput"
+                    placeholder="Message JARVIS..."
+                    onkeydown="if(event.key==='Enter')sendMessage()">
+
+                <button onclick="sendMessage()">Send</button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <aside class="rightbar">
+
+        <div class="widget">
+            <h3>AI STATUS</h3>
+            <p>JARVIS is online.</p>
+            <p>System: Ready</p>
+        </div>
+
+        <div class="widget">
+            <h3>QUICK ACCESS</h3>
+            <p>Your recent workspace shortcuts will appear here.</p>
+            <button onclick="location.href='settings.html'">
+                Open Settings →
+            </button>
+        </div>
+
+        <div class="widget">
+            <h3>PROJECTS</h3>
+            <p>No connected projects yet.</p>
+        </div>
+
+        <div class="widget">
+            <h3>MEMORY</h3>
+            <p>Memory integration is not connected yet.</p>
+        </div>
+
+        <div class="widget">
+            <h3>CALENDAR</h3>
+            <p>Calendar integration is not connected yet.</p>
+        </div>
+
+    </aside>
+
+</div>
+
+<script>
+const chat = document.getElementById("chat");
+const input = document.getElementById("userInput");
+const statusText = document.getElementById("status");
+
+function addMessage(text, type) {
+    const message = document.createElement("div");
+    message.className = "message " + type;
+    message.textContent = text;
+    chat.appendChild(message);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function sendMessage() {
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    addMessage(text, "user");
+    input.value = "";
+
+    statusText.textContent = "● MESSAGE RECEIVED";
+
+    setTimeout(() => {
+        addMessage(
+            "Your message has been received. The real JARVIS AI connection will be added later.",
+            "ai"
+        );
+
+        statusText.textContent = "● SYSTEM ONLINE";
+    }, 500);
+}
+
+// Load saved AI appearance settings
+const savedSettings = localStorage.getItem("jarvisSettings");
+
+if (savedSettings) {
+    const settings = JSON.parse(savedSettings);
+
+    if (settings.aiName === "ULTRON") {
+        document.getElementById("reactorLetter").textContent = "U";
+        document.getElementById("welcome").textContent =
+            "ULTRON ONLINE.";
+        document.getElementById("reactor").style.borderColor = "#ff3030";
+        document.getElementById("reactor").style.boxShadow =
+            "0 0 25px #ff3030, 0 0 55px #ff303077";
+    }
+
+    if (settings.aiName === "Custom" && settings.customName) {
+        document.getElementById("reactorLetter").textContent =
+            settings.customName.charAt(0).toUpperCase();
+
+        document.getElementById("welcome").textContent =
+            "Hello. I am " + settings.customName + ".";
+    }
+
+    if (settings.reactor === false) {
+        document.getElementById("reactor").style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
