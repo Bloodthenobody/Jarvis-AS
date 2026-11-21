@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS AS - Settings</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080d18;
+    color: white;
+    padding: 20px;
+}
+
+.container {
+    max-width: 950px;
+    margin: 30px auto;
+}
+
+.logo {
+    color: #54aaff;
+    letter-spacing: 4px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #aabbd0;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.section {
+    background: #111b2d;
+    border: 1px solid #263c5b;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 18px;
+}
+
+.section h2 {
+    color: #75baff;
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid #26364c;
+}
+
+.setting:last-child {
+    border-bottom: none;
+}
+
+.setting-info {
+    flex: 1;
+}
+
+.setting-info strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.setting-info small {
+    color: #9eb3ca;
+    line-height: 1.5;
+}
+
+select, input[type="text"] {
+    background: #091322;
+    color: white;
+    border: 1px solid #345071;
+    border-radius: 8px;
+    padding: 10px;
+    max-width: 190px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #1689f5;
+    cursor: pointer;
+}
+
+button {
+    padding: 13px 20px;
+    background: #1689f5;
+    border: none;
+    color: white;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #0872d6;
+}
+
+.save {
+    width: 100%;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.message {
+    color: #72dba0;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.back {
+    display: inline-block;
+    color: #7bbcff;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+@media(max-width: 550px) {
+    .setting {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    select, input[type="text"] {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">JARVIS AS</div>
+
+    <h1>Settings</h1>
+    <p class="subtitle">
+        Personalize your JARVIS experience.
+        Your settings can be customized for each profile.
+    </p>
+
+    <div class="section">
+        <h2>AI Personality</h2>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>AI Name</strong>
+                <small>Choose the name of your assistant.</small>
+            </div>
+            <select id="aiName">
+                <option>JARVIS</option>
+                <option>ULTRON</option>
+                <option>Custom</option>
+            </select>
+        </div>
+
+        <div class="setting" id="customNameRow" style="display:none">
+            <div class="setting-info">
+                <strong>Custom AI name</strong>
+                <small>Enter your own assistant name.</small>
+            </div>
+            <input type="text" id="customName" placeholder="Your AI name">
+        </div>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>Speaking style</strong>
+                <small>How should your AI communicate?</small>
+            </div>
+            <select id="style">
+                <option>Friendly</option>
+                <option>Professional</option>
+                <option>Casual</option>
+                <option>Formal</option>
+                <option>Adaptive</option>
+            </select>
+        </div>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>Adapt to my typing style</strong>
+                <small>Adjust communication to your language and writing style.</small>
+            </div>
+            <input type="checkbox" id="adaptive" checked>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Appearance</h2>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>Theme</strong>
+                <small>Choose the appearance of JARVIS AS.</small>
+            </div>
+            <select id="theme">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="system">System default</option>
+            </select>
+        </div>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>Arc Reactor animation</strong>
+                <small>Show the animated AI reactor in the dashboard.</small>
+            </div>
+            <input type="checkbox" id="reactor" checked>
+        </div>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>Interface sounds</strong>
+                <small>Enable subtle JARVIS notification sounds.</small>
+            </div>
+            <input type="checkbox" id="sounds" checked>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Language</h2>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>Language settings</strong>
+                <small>Choose one or more languages for your AI.</small>
+            </div>
+            <button onclick="location.href='language.html'">
+                Select Language
+            </button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Notifications</h2>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>Push notifications</strong>
+                <small>Allow JARVIS to show notifications.</small>
+            </div>
+            <input type="checkbox" id="notifications" checked>
+        </div>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>Quiet Mode</strong>
+                <small>Disable ordinary notifications and sounds.</small>
+            </div>
+            <input type="checkbox" id="quiet">
+        </div>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>Hide message previews</strong>
+                <small>Hide private message content in notifications.</small>
+            </div>
+            <input type="checkbox" id="previews">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Privacy & Memory</h2>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>JARVIS Memory</strong>
+                <small>Allow JARVIS to use saved preferences and memories.</small>
+            </div>
+            <input type="checkbox" id="memory" checked>
+        </div>
+
+        <div class="setting">
+            <div class="setting-info">
+                <strong>Smart Check-in (JARVIS CARE)</strong>
+                <small>Allow optional wellbeing check-ins after inactivity.</small>
+            </div>
+            <input type="checkbox" id="care">
+        </div>
+    </div>
+
+    <button class="save" onclick="saveSettings()">
+        Save Settings
+    </button>
+
+    <div class="message" id="message"></div>
+
+    <a class="back" href="index.html">← Back to homepage</a>
+
+</div>
+
+<script>
+const settingIds = [
+    "aiName",
+    "customName",
+    "style",
+    "adaptive",
+    "theme",
+    "reactor",
+    "sounds",
+    "notifications",
+    "quiet",
+    "previews",
+    "memory",
+    "care"
+];
+
+const aiName = document.getElementById("aiName");
+const customNameRow = document.getElementById("customNameRow");
+
+aiName.addEventListener("change", () => {
+    customNameRow.style.display =
+        aiName.value === "Custom" ? "flex" : "none";
+});
+
+function saveSettings() {
+    const settings = {};
+
+    settingIds.forEach(id => {
+        const element = document.getElementById(id);
+
+        settings[id] = element.type === "checkbox"
+            ? element.checked
+            : element.value;
+    });
+
+    localStorage.setItem("jarvisSettings", JSON.stringify(settings));
+
+    document.getElementById("message").textContent =
+        "Settings saved on this device!";
+}
+
+function loadSettings() {
+    const saved = localStorage.getItem("jarvisSettings");
+
+    if (!saved) return;
+
+    const settings = JSON.parse(saved);
+
+    settingIds.forEach(id => {
+        const element = document.getElementById(id);
+
+        if (settings[id] === undefined) return;
+
+        if (element.type === "checkbox") {
+            element.checked = settings[id];
+        } else {
+            element.value = settings[id];
+        }
+    });
+
+    customNameRow.style.display =
+        aiName.value === "Custom" ? "flex" : "none";
+}
+
+loadSettings();
+</script>
+
+</body>
+</html>
