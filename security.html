@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS OAI | Security Center</title>
+<style>
+:root{
+ --bg:#080f1c;
+ --panel:#101d30;
+ --panel2:#152842;
+ --text:#f3f7ff;
+ --muted:#a8bad0;
+ --blue:#55baff;
+ --green:#42d69b;
+ --orange:#ffb45c;
+ --red:#ff6575;
+ --border:#263c56;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{
+ padding:18px 5%;border-bottom:1px solid var(--border);
+ display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap
+}
+a{color:var(--blue);text-decoration:none}
+.logo{font-size:21px;font-weight:bold;letter-spacing:2px;color:var(--text)}
+.logo span{color:var(--blue)}
+.container{max-width:1150px;margin:auto;padding:30px 5%}
+.hero{
+ padding:30px;background:radial-gradient(circle at top right,#173c61,var(--panel) 65%);
+ border:1px solid var(--border);border-radius:18px;margin-bottom:25px
+}
+.eyebrow{color:var(--blue);font-weight:bold;letter-spacing:2px}
+h1{font-size:clamp(28px,5vw,42px);margin:12px 0}
+p{color:var(--muted);line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin:25px 0}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:22px}
+.card h3{margin-top:0}
+.number{font-size:27px;color:var(--blue);font-weight:bold}
+.icon{font-size:28px;color:var(--blue)}
+.badge{display:inline-block;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.green{background:#174b3b;color:#75edbd}
+.orange{background:#49351d;color:#ffcf8c}
+.red{background:#4c2029;color:#ff9daa}
+.menu{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+button{
+ cursor:pointer;border:1px solid var(--border);border-radius:9px;
+ padding:11px 15px;background:var(--panel2);color:var(--text)
+}
+button:hover{border-color:var(--blue)}
+.menu button.active{background:var(--blue);color:#061322}
+.panel-section{display:none}
+.panel-section.active{display:block}
+.row{
+ display:flex;justify-content:space-between;align-items:center;gap:15px;
+ padding:14px 0;border-bottom:1px solid var(--border);flex-wrap:wrap
+}
+.notice{padding:15px;border:1px solid #8b642e;background:#382a18;color:#ffcf8c;border-radius:10px;line-height:1.6;margin:20px 0}
+.status{color:var(--green);font-weight:bold}
+.small{font-size:12px;color:var(--muted)}
+input,select{
+ width:100%;padding:12px;border-radius:9px;border:1px solid var(--border);
+ background:var(--bg);color:var(--text);margin:8px 0 15px
+}
+.primary{background:var(--blue);color:#061322;font-weight:bold;border:0}
+footer{text-align:center;padding:25px;border-top:1px solid var(--border);color:var(--muted)}
+@media(max-width:500px){.container{padding:20px 4%}.hero{padding:22px}}
+</style>
+</head>
+<body>
+
+<header>
+ <a class="logo" href="index.html">◉ JARVIS <span>SECURITY</span></a>
+ <a href="owner.html">← Owner Dashboard</a>
+</header>
+
+<main class="container">
+
+<section class="hero">
+ <div class="eyebrow">ARTIFICIAL SUPPORT · PROTECTION SYSTEM</div>
+ <h1>SECURITY CENTER</h1>
+ <p>Centraal overzicht voor de beveiliging van JARVIS AS, accounts, AI en apparaten.</p>
+ <span class="badge green">SECURITY INTERFACE PROTOTYPE</span>
+</section>
+
+<div class="notice">
+ <strong>Development mode</strong><br>
+ Dit is voorlopig een visueel prototype. De beveiligingsfuncties hieronder
+ zijn nog niet verbonden met een echte server. Er worden geen echte
+ accounts, wachtwoorden of sessies beheerd.
+</div>
+
+<section class="grid">
+ <article class="card">
+  <div class="icon">🛡</div>
+  <h3>Security Status</h3>
+  <div class="number">Development</div>
+  <p>Beveiliging wordt nog gebouwd.</p>
+ </article>
+ <article class="card">
+  <div class="icon">🔐</div>
+  <h3>Authentication</h3>
+  <div class="number">Pending</div>
+  <p>Veilige accountverificatie moet nog worden aangesloten.</p>
+ </article>
+ <article class="card">
+  <div class="icon">📱</div>
+  <h3>Devices</h3>
+  <div class="number">Pending</div>
+  <p>Apparaatbeheer wordt later toegevoegd.</p>
+ </article>
+ <article class="card">
+  <div class="icon">⚙</div>
+  <h3>2FA</h3>
+  <div class="number">Planned</div>
+  <p>Tweestapsverificatie staat op de planning.</p>
+ </article>
+</section>
+
+<h2>Security Control Center</h2>
+<nav class="menu">
+ <button class="active" data-panel="overview">Overview</button>
+ <button data-panel="login">Login Security</button>
+ <button data-panel="password">Password Security</button>
+ <button data-panel="twofa">Two-Factor</button>
+ <button data-panel="devices">Devices</button>
+ <button data-panel="sessions">Sessions</button>
+ <button data-panel="alerts">Security Alerts</button>
+ <button data-panel="owner">Owner Protection</button>
+</nav>
+
+<section id="overview" class="panel-section active">
+ <div class="card">
+  <h2>Security Overview</h2>
+  <p>Hier komt het algemene beveiligingsoverzicht van JARVIS.</p>
+  <div class="row"><span>Secure login</span><span class="badge orange">Not connected</span></div>
+  <div class="row"><span>Password hashing</span><span class="badge orange">Not connected</span></div>
+  <div class="row"><span>Two-factor authentication</span><span class="badge orange">Planned</span></div>
+  <div class="row"><span>Device management</span><span class="badge orange">Planned</span></div>
+  <div class="row"><span>Security logging</span><span class="badge orange">Planned</span></div>
+ </div>
+</section>
+
+<section id="login" class="panel-section">
+ <div class="card">
+  <h2>Login Security</h2>
+  <p>De toekomstige beveiliging van gebruikersaanmeldingen.</p>
+  <div class="row"><span>Email verification</span><span>Planned</span></div>
+  <div class="row"><span>Google sign-in</span><span>Planned</span></div>
+  <div class="row"><span>Phone verification</span><span>Planned</span></div>
+  <div class="row"><span>Login attempt limits</span><span>Planned</span></div>
+  <div class="row"><span>Account recovery</span><span>Planned</span></div>
+ </div>
+</section>
+
+<section id="password" class="panel-section">
+ <div class="card">
+  <h2>Password Security</h2>
+  <p>JARVIS zal wachtwoorden veilig verwerken en opslaan.</p>
+  <div class="row"><span>Password hashing</span><span>Required</span></div>
+  <div class="row"><span>Password reset</span><span>Planned</span></div>
+  <div class="row"><span>Password change</span><span>Planned</span></div>
+  <div class="row"><span>Owner password visibility</span><span>Never allowed</span></div>
+  <div class="notice">
+   Wachtwoorden worden nooit leesbaar opgeslagen. Ook de Owner kan
+   bestaande wachtwoorden niet bekijken. De gebruiker kan wel zelf een
+   nieuw wachtwoord instellen of een reset aanvragen.
+  </div>
+  <h3>Password strength preview</h3>
+  <label for="passwordTest">Test een wachtwoord (alleen lokaal)</label>
+  <input id="passwordTest" type="password" placeholder="Typ hier een testwachtwoord">
+  <p id="strength" class="small">Er is nog geen test uitgevoerd.</p>
+  <p class="small">Gebruik hier geen echt accountwachtwoord.</p>
+ </div>
+</section>
+
+<section id="twofa" class="panel-section">
+ <div class="card">
+  <h2>Two-Factor Authentication</h2>
+  <p>Extra verificatie voor accounts en Owner-toegang.</p>
+  <div class="row"><span>Authenticator app</span><span>Planned</span></div>
+  <div class="row"><span>Email verification code</span><span>Planned</span></div>
+  <div class="row"><span>Backup codes</span><span>Planned</span></div>
+  <div class="row"><span>Owner mandatory 2FA</span><span>Recommended</span></div>
+ </div>
+</section>
+
+<section id="devices" class="panel-section">
+ <div class="card">
+  <h2>Device Management</h2>
+  <p>Gebruikers kunnen straks hun aangemelde apparaten bekijken.</p>
+  <div class="row"><span>Known devices</span><span>Not connected</span></div>
+  <div class="row"><span>Device names</span><span>Planned</span></div>
+  <div class="row"><span>Last active time</span><span>Planned</span></div>
+  <div class="row"><span>Remove device access</span><span>Planned</span></div>
+ </div>
+</section>
+
+<section id="sessions" class="panel-section">
+ <div class="card">
+  <h2>Active Sessions</h2>
+  <p>Hier kunnen gebruikers later zien waar hun account actief is.</p>
+  <div class="row"><span>Session overview</span><span>Not connected</span></div>
+  <div class="row"><span>Logout other devices</span><span>Planned</span></div>
+  <div class="row"><span>Session expiration</span><span>Planned</span></div>
+  <div class="row"><span>Suspicious session detection</span><span>Planned</span></div>
+ </div>
+</section>
+
+<section id="alerts" class="panel-section">
+ <div class="card">
+  <h2>Security Alerts</h2>
+  <p>Voorbeelden van meldingen die JARVIS later kan tonen.</p>
+  <div class="row"><span>New login detected</span><span class="badge orange">Planned</span></div>
+  <div class="row"><span>Password changed</span><span class="badge orange">Planned</span></div>
+  <div class="row"><span>Unusual activity</span><span class="badge orange">Planned</span></div>
+  <div class="row"><span>Account recovery request</span><span class="badge orange">Planned</span></div>
+ </div>
+</section>
+
+<section id="owner" class="panel-section">
+ <div class="card">
+  <h2>Owner Protection</h2>
+  <p>Extra beveiliging voor de JARVIS OAI Owner.</p>
+  <div class="row"><span>Owner account</span><strong>kyanog01@gmail.com</strong></div>
+  <div class="row"><span>Owner role verification</span><span>Not connected</span></div>
+  <div class="row"><span>Mandatory 2FA</span><span>Planned</span></div>
+  <div class="row"><span>Owner action logs</span><span>Planned</span></div>
+  <div class="row"><span>Recovery protection</span><span>Planned</span></div>
+  <div class="notice">
+   Owner-rechten moeten altijd op de server worden gecontroleerd.
+   Een e-mailadres of rolnaam in HTML is geen bewijs van eigenaarschap.
+  </div>
+ </div>
+</section>
+
+<div class="card" style="margin-top:25px">
+ <h2>JARVIS Security Principles</h2>
+ <div class="row"><span>Privacy by design</span><span class="status">Required</span></div>
+ <div class="row"><span>Encrypted connections</span><span class="status">Required</span></div>
+ <div class="row"><span>Secure password hashing</span><span class="status">Required</span></div>
+ <div class="row"><span>Minimum access permissions</span><span class="status">Required</span></div>
+ <div class="row"><span>Security updates</span><span class="status">Required</span></div>
+</div>
+
+</main>
+
+<footer>
+ JARVIS OAI · SECURITY CENTER · 2026
+ <br><br>
+ <a href="owner.html">Owner Dashboard</a> ·
+ <a href="privacy.html">Privacy & Policy</a> ·
+ <a href="index.html">Homepage</a>
+</footer>
+
+<script>
+const buttons=document.querySelectorAll("[data-panel]");
+const panels=document.querySelectorAll(".panel-section");
+
+buttons.forEach(button=>{
+ button.addEventListener("click",()=>{
+  buttons.forEach(item=>item.classList.remove("active"));
+  panels.forEach(panel=>panel.classList.remove("active"));
+  button.classList.add("active");
+  document.getElementById(button.dataset.panel).classList.add("active");
+ });
+});
+
+document.getElementById("passwordTest").addEventListener("input",event=>{
+ const value=event.target.value;
+ const output=document.getElementById("strength");
+
+ if(!value){
+  output.textContent="Er is nog geen test uitgevoerd.";
+  return;
+ }
+
+ let score=0;
+ if(value.length>=12)score++;
+ if(/[A-Z]/.test(value))score++;
+ if(/[a-z]/.test(value))score++;
+ if(/[0-9]/.test(value))score++;
+ if(/[^A-Za-z0-9]/.test(value))score++;
+
+ const labels=[
+  "Zeer zwak",
+  "Zwak",
+  "Matig",
+  "Redelijk",
+  "Sterk",
+  "Zeer sterk"
+ ];
+ output.textContent="Indicatie: "+labels[score]+".";
+});
+</script>
+
+</body>
+</html>
