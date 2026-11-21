@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS OAI | Owner Dashboard</title>
+
+<style>
+:root{
+ --bg:#080f1c;
+ --panel:#101d30;
+ --panel2:#152842;
+ --text:#f3f7ff;
+ --muted:#a8bad0;
+ --blue:#55baff;
+ --border:#263c56;
+ --green:#42d69b;
+ --orange:#ffb45c;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:var(--bg);
+ color:var(--text);
+}
+header{
+ padding:18px 5%;
+ border-bottom:1px solid var(--border);
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+ flex-wrap:wrap;
+}
+.logo{font-size:21px;font-weight:bold;letter-spacing:2px}
+.logo span{color:var(--blue)}
+header a{color:var(--muted);text-decoration:none}
+.container{max-width:1200px;margin:auto;padding:30px 5%}
+.hero{
+ padding:30px;
+ background:radial-gradient(circle at top right,#16416b,var(--panel) 65%);
+ border:1px solid var(--border);
+ border-radius:18px;
+ margin-bottom:25px;
+}
+.eyebrow{color:var(--blue);font-weight:bold;letter-spacing:2px}
+h1{font-size:clamp(28px,5vw,42px);margin:12px 0}
+p{color:var(--muted);line-height:1.6}
+.badge{
+ display:inline-block;
+ background:#174b3b;
+ color:#75edbd;
+ padding:7px 12px;
+ border-radius:20px;
+ font-size:12px;
+ font-weight:bold;
+}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:16px;
+ margin:25px 0;
+}
+.card{
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:15px;
+ padding:22px;
+}
+.card h3{margin-top:0}
+.number{font-size:30px;color:var(--blue);font-weight:bold}
+.icon{font-size:28px;color:var(--blue)}
+button,.button{
+ display:inline-block;
+ border:1px solid var(--border);
+ border-radius:9px;
+ padding:11px 15px;
+ background:var(--panel2);
+ color:var(--text);
+ cursor:pointer;
+ text-decoration:none;
+ font-size:14px;
+}
+button:hover,.button:hover{border-color:var(--blue)}
+.primary{background:var(--blue);color:#061322;font-weight:bold;border:0}
+.menu{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin:20px 0;
+}
+.menu button.active{
+ background:var(--blue);
+ color:#061322;
+}
+.panel-section{display:none}
+.panel-section.active{display:block}
+.row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+ padding:14px 0;
+ border-bottom:1px solid var(--border);
+ flex-wrap:wrap;
+}
+.notice{
+ padding:15px;
+ border-radius:10px;
+ border:1px solid #8b642e;
+ background:#382a18;
+ color:#ffcf8c;
+ line-height:1.6;
+ margin:20px 0;
+}
+.status{color:var(--green);font-weight:bold}
+.small{font-size:12px;color:var(--muted)}
+footer{
+ text-align:center;
+ padding:25px;
+ border-top:1px solid var(--border);
+ color:var(--muted);
+}
+@media(max-width:500px){
+ .container{padding:20px 4%}
+ .hero{padding:22px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <a class="logo" href="index.html">◉ JARVIS <span>OAI</span></a>
+ <a href="index.html">← Back to JARVIS AS</a>
+</header>
+
+<main class="container">
+
+ <section class="hero">
+  <div class="eyebrow">ARTIFICIAL SUPPORT · CONTROL CENTER</div>
+  <h1>OWNER DASHBOARD</h1>
+  <p>Welcome to your JARVIS OAI control center.</p>
+  <span class="badge">OWNER DASHBOARD PROTOTYPE</span>
+ </section>
+
+ <div class="notice">
+  <strong>Development version</strong><br>
+  Dit dashboard is momenteel een interfaceprototype.
+  De getoonde eigenaarstatus is nog niet door een beveiligde server
+  geverifieerd. Beheeracties en accountrechten zijn nog niet actief.
+ </div>
+
+ <section class="grid">
+  <article class="card">
+   <div class="icon">♛</div>
+   <h3>Owner</h3>
+   <div class="number">JARVIS OAI</div>
+   <p>Platform owner account</p>
+  </article>
+
+  <article class="card">
+   <div class="icon">◎</div>
+   <h3>Platform</h3>
+   <div class="number">JARVIS AS</div>
+   <p class="status">Interface prototype</p>
+  </article>
+
+  <article class="card">
+   <div class="icon">♙</div>
+   <h3>Family members</h3>
+   <div class="number">∞</div>
+   <p>Ontworpen voor onbeperkt leden</p>
+  </article>
+
+  <article class="card">
+   <div class="icon">⚙</div>
+   <h3>Platform status</h3>
+   <div class="number">Development</div>
+   <p>In ontwikkeling</p>
+  </article>
+ </section>
+
+ <h2>Owner Control Center</h2>
+
+ <nav class="menu">
+  <button class="active" data-panel="overview">Overview</button>
+  <button data-panel="platform">Platform</button>
+  <button data-panel="accounts">Accounts</button>
+  <button data-panel="family">Family Owner</button>
+  <button data-panel="ai">AI Management</button>
+  <button data-panel="security">Security</button>
+ </nav>
+
+ <section id="overview" class="panel-section active">
+  <div class="card">
+   <h2>Welcome, Owner</h2>
+   <p>Vanuit deze plek kun je straks de verschillende onderdelen van JARVIS OAI beheren.</p>
+   <div class="row">
+    <span>Website</span>
+    <span class="status">Prototype aanwezig</span>
+   </div>
+   <div class="row">
+    <span>App</span>
+    <span>In ontwikkeling</span>
+   </div>
+   <div class="row">
+    <span>AI connection</span>
+    <span>Niet aangesloten</span>
+   </div>
+   <div class="row">
+    <span>Secure authentication</span>
+    <span>Moet nog gebouwd worden</span>
+   </div>
+  </div>
+ </section>
+
+ <section id="platform" class="panel-section">
+  <div class="card">
+   <h2>Platform Management</h2>
+   <p>De centrale plek voor toekomstige platforminstellingen.</p>
+   <div class="row"><span>JARVIS AS website</span><span>Gepland</span></div>
+   <div class="row"><span>JARVIS Phone</span><span>Gepland</span></div>
+   <div class="row"><span>JARVIS App</span><span>Gepland</span></div>
+   <div class="row"><span>JARVIS Laptop</span><span>Gepland</span></div>
+   <div class="row"><span>Platform updates</span><span>Gepland</span></div>
+  </div>
+ </section>
+
+ <section id="accounts" class="panel-section">
+  <div class="card">
+   <h2>Account Management</h2>
+   <p>Toekomstig overzicht van gebruikers en accounttypes.</p>
+   <div class="row"><span>Personal Account</span><span>Gepland</span></div>
+   <div class="row"><span>Student Account</span><span>Gepland</span></div>
+   <div class="row"><span>Family Account</span><span>Gepland</span></div>
+   <div class="row"><span>Family Owner Account</span><span>Gepland</span></div>
+   <div class="row"><span>JARVIS Pro</span><span>Gepland</span></div>
+  </div>
+ </section>
+
+ <section id="family" class="panel-section">
+  <div class="card">
+   <h2>Family Owner Management</h2>
+   <p>Het toekomstige familiebeheersysteem.</p>
+   <div class="row"><span>Maximum aantal leden</span><strong>Onbeperkt ontworpen</strong></div>
+   <div class="row"><span>Family administrators</span><span>Gepland</span></div>
+   <div class="row"><span>Member invitations</span><span>Gepland</span></div>
+   <div class="row"><span>Individual profiles</span><span>Gepland</span></div>
+   <div class="row"><span>Privacy controls</span><span>Gepland</span></div>
+  </div>
+ </section>
+
+ <section id="ai" class="panel-section">
+  <div class="card">
+   <h2>AI Management</h2>
+   <p>Overzicht van de AI-persona's en creatieve onderdelen.</p>
+   <div class="row"><span>JARVIS</span><span class="status">Ontwerp aanwezig</span></div>
+   <div class="row"><span>ULTRON</span><span>In ontwikkeling</span></div>
+   <div class="row"><span>Custom AI personalities</span><span>Gepland</span></div>
+   <div class="row"><span>AI Create</span><span>Gepland</span></div>
+   <div class="row"><span>JARVIS Game Studio</span><span>Gepland</span></div>
+   <div class="row"><span>Memory system</span><span>Gepland</span></div>
+  </div>
+ </section>
+
+ <section id="security" class="panel-section">
+  <div class="card">
+   <h2>Security Center</h2>
+   <p>Veiligheidsfuncties die we later server-side gaan bouwen.</p>
+   <div class="row"><span>Secure login</span><span>Niet aangesloten</span></div>
+   <div class="row"><span>Owner verification</span><span>Niet aangesloten</span></div>
+   <div class="row"><span>Two-factor authentication</span><span>Gepland</span></div>
+   <div class="row"><span>Access logs</span><span>Gepland</span></div>
+   <div class="row"><span>API key protection</span><span>Gepland</span></div>
+  </div>
+ </section>
+
+ <section class="card" style="margin-top:25px">
+  <h2>Owner Account Information</h2>
+  <div class="row">
+   <span>Account name</span>
+   <strong>JARVIS Family Owner</strong>
+  </div>
+  <div class="row">
+   <span>Email</span>
+   <strong>kyanog01@gmail.com</strong>
+  </div>
+  <div class="row">
+   <span>Intended role</span>
+   <strong>OWNER</strong>
+  </div>
+  <p class="small">
+   Dit zijn de ingestelde projectgegevens. Ze bewijzen niet dat een
+   gebruiker daadwerkelijk is ingelogd of eigenaar is.
+  </p>
+ </section>
+
+</main>
+
+<footer>
+ JARVIS OAI · OWNER CONTROL CENTER · 2026
+ <br><br>
+ <a href="index.html" class="button">Back to Homepage</a>
+</footer>
+
+<script>
+const buttons=document.querySelectorAll("[data-panel]");
+const panels=document.querySelectorAll(".panel-section");
+
+buttons.forEach(button=>{
+ button.addEventListener("click",()=>{
+  buttons.forEach(item=>item.classList.remove("active"));
+  panels.forEach(panel=>panel.classList.remove("active"));
+
+  button.classList.add("active");
+  document.getElementById(button.dataset.panel).classList.add("active");
+ });
+});
+</script>
+
+</body>
+</html>
