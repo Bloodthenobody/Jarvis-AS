@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS AS - Chats</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080d18;
+    color: white;
+    min-height: 100vh;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background: #0d1728;
+    border-right: 1px solid #263c5b;
+    padding: 22px;
+}
+
+.logo {
+    color: #54aaff;
+    font-size: 20px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 9px;
+    font-weight: bold;
+}
+
+.new-chat {
+    width: 100%;
+    padding: 14px;
+    background: #1689f5;
+    color: white;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.search {
+    width: 100%;
+    padding: 12px;
+    border-radius: 9px;
+    border: 1px solid #345071;
+    background: #091322;
+    color: white;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+.section-title {
+    color: #7189a5;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chat-item {
+    background: #111e31;
+    border: 1px solid #263c5b;
+    padding: 13px;
+    border-radius: 9px;
+    cursor: pointer;
+    text-align: left;
+    color: white;
+    width: 100%;
+}
+
+.chat-item.active {
+    border-color: #1689f5;
+    background: #173453;
+}
+
+.chat-item small {
+    display: block;
+    color: #91a8c3;
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+.main {
+    padding: 30px;
+    min-width: 0;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    gap: 15px;
+}
+
+.topbar a {
+    color: #7bbcff;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 29px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #9eb3ca;
+    margin-bottom: 25px;
+}
+
+.conversation {
+    background: #0d1728;
+    border: 1px solid #263c5b;
+    border-radius: 14px;
+    padding: 22px;
+    min-height: 350px;
+}
+
+.conversation h2 {
+    color: #75baff;
+    font-size: 19px;
+    margin-bottom: 20px;
+}
+
+.message {
+    padding: 14px;
+    background: #162a44;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.message.user {
+    background: #164d7d;
+    margin-left: auto;
+    max-width: 85%;
+}
+
+.message.ai {
+    border-left: 3px solid #2999ff;
+    max-width: 85%;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.actions button {
+    padding: 12px 17px;
+    background: #18375b;
+    color: white;
+}
+
+.actions .delete {
+    background: #71333a;
+}
+
+.empty {
+    color: #8da3bd;
+    padding: 20px 0;
+}
+
+@media(max-width: 650px) {
+    .app {
+        display: block;
+    }
+
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid #263c5b;
+    }
+
+    .main {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">JARVIS AS</div>
+
+        <button class="new-chat" onclick="newChat()">
+            + New Chat
+        </button>
+
+        <input
+            class="search"
+            id="search"
+            placeholder="Search chats..."
+            oninput="renderChats()"
+        >
+
+        <div class="section-title">CHAT HISTORY</div>
+
+        <div class="chat-list" id="chatList"></div>
+
+    </aside>
+
+    <main class="main">
+
+        <div class="topbar">
+            <span>◈ JARVIS AS / Chats</span>
+            <a href="dashboard.html">Back to Dashboard →</a>
+        </div>
+
+        <h1 id="chatTitle">Your conversations</h1>
+
+        <p class="subtitle">
+            Find and manage your previous conversations.
+        </p>
+
+        <div class="conversation">
+            <h2 id="conversationTitle">Select a conversation</h2>
+
+            <div id="messages">
+                <p class="empty">
+                    Choose a chat from the left side or create a new one.
+                </p>
+            </div>
+
+            <div class="actions">
+                <button onclick="newChat()">+ New Chat</button>
+                <button class="delete" onclick="deleteChat()">
+                    Delete Chat
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+const STORAGE_KEY = "jarvisChatHistory";
+
+let chats = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+let activeChatId = null;
+
+function saveChats() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(chats));
+}
+
+function getActiveChat() {
+    return chats.find(chat => chat.id === activeChatId);
+}
+
+function newChat() {
+    const chat = {
+        id: Date.now(),
+        title: "New conversation",
+        date: new Date().toLocaleDateString(),
+        messages: []
+    };
+
+    chats.unshift(chat);
+    activeChatId = chat.id;
+
+    saveChats();
+    renderChats();
+    renderConversation();
+}
+
+function renderChats() {
+    const list = document.getElementById("chatList");
+    const query = document.getElementById("search").value.toLowerCase();
+
+    list.innerHTML = "";
+
+    chats.forEach(chat => {
+        if (!chat.title.toLowerCase().includes(query)) return;
+
+        const button = document.createElement("button");
+        button.className = "chat-item" +
+            (chat.id === activeChatId ? " active" : "");
+
+        button.innerHTML = "";
+
+        const title = document.createElement("strong");
+        title.textContent = chat.title;
+
+        const date = document.createElement("small");
+        date.textContent = chat.date;
+
+        button.append(title, date);
+
+        button.onclick = () => {
+            activeChatId = chat.id;
+            renderChats();
+            renderConversation();
+        };
+
+        list.appendChild(button);
+    });
+
+    if (!list.children.length) {
+        const empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = "No conversations found.";
+        list.appendChild(empty);
+    }
+}
+
+function renderConversation() {
+    const chat = getActiveChat();
+    const container = document.getElementById("messages");
+
+    container.innerHTML = "";
+
+    if (!chat) {
+        document.getElementById("conversationTitle").textContent =
+            "Select a conversation";
+
+        container.textContent =
+            "Choose a chat or create a new one.";
+
+        return;
+    }
+
+    document.getElementById("conversationTitle").textContent = chat.title;
+    document.getElementById("chatTitle").textContent = chat.title;
+
+    if (!chat.messages.length) {
+        const empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = "This conversation is empty.";
+        container.appendChild(empty);
+        return;
+    }
+
+    chat.messages.forEach(message => {
+        const element = document.createElement("div");
+        element.className = "message " + message.sender;
+        element.textContent = message.text;
+        container.appendChild(element);
+    });
+}
+
+function deleteChat() {
+    if (!activeChatId) return;
+
+    const confirmed = confirm(
+        "Are you sure you want to delete this conversation?"
+    );
+
+    if (!confirmed) return;
+
+    chats = chats.filter(chat => chat.id !== activeChatId);
+    activeChatId = null;
+
+    saveChats();
+    renderChats();
+    renderConversation();
+
+    document.getElementById("chatTitle").textContent =
+        "Your conversations";
+}
+
+renderChats();
+renderConversation();
+</script>
+
+</body>
+</html>
